@@ -39,12 +39,13 @@ void addRow(MarkdownTableParser& parser) {
     std::stringstream ss(rowValue);
     Row row{};
     int i = 0;
-    while(ss.eof()){
+    while(!ss.eof()){
         char* value = new char[20];
         ss >> value;
         row.setValue( value, i++);
     }
     parser.addRow(row);
+    std::cout << "Row added!" << std::endl;
 
 }
 
@@ -70,10 +71,7 @@ void programLoop(MarkdownTableParser& parser){
     }while(option != '9');
 }
 
-int main(){
-    MarkdownTableParser parser;
-
-
+void loadTable(MarkdownTableParser& parser) {
     std::ifstream ifs("table.md");
 
     parser.readFromFile(ifs);
@@ -81,6 +79,11 @@ int main(){
     parser.printTable();
     ifs.close();
 
+}
+
+int main(){
+    MarkdownTableParser parser;
+    loadTable(parser);
     programLoop(parser);
 
 }

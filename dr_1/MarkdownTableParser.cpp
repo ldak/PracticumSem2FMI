@@ -115,5 +115,9 @@ void MarkdownTableParser::changeColumnName(const char *oldName, const char *newN
 
 void MarkdownTableParser::addRow(const Row& row) {
     this->rows[this->rowCount++] = row;
-
+    for (int i = 0; i < this->columnCount; ++i) {
+        int length = this->rows[this->rowCount].getValueLength(i);
+        if (this->columns[i].getColumnSize() < length + 2)
+            this->columns[i].setColumnSize(length + 2);
+    }
 }
