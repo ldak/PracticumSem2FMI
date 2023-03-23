@@ -77,7 +77,6 @@ void MarkdownTableParser::readFromFile(std::ifstream &ifs) {
         ifs.getline(value, 20, '|');
 //        std::cout << value << std::endl;
         this->columns[i].setAlignment(value);
-        this->columns[i++].setColumnSize(strLength(value) + 2);
     }
 
     while(!ifs.eof()){
@@ -100,5 +99,21 @@ void MarkdownTableParser::readFromFile(std::ifstream &ifs) {
         }
         this->rowCount++;
     }
+
+}
+
+void MarkdownTableParser::changeColumnName(const char *oldName, const char *newName) {
+    for (int i = 0; i < this->columnCount; ++i) {
+        const char* name = this->columns[i].getName();
+        if (strCompare(name, oldName) == 0){
+            this->columns[i].setName(newName);
+            return;
+        }
+    }
+
+}
+
+void MarkdownTableParser::addRow(const Row& row) {
+    this->rows[this->rowCount++] = row;
 
 }

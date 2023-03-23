@@ -19,6 +19,8 @@ void Column::setAlignment(Alignment align) {
 
 void Column::setName(const char *name) {
     strcpyWithoutSpaces(this->name, name);
+    if (this->columnSize < strLength(this->name) + 2)
+        this->columnSize = strLength(this->name) + 2;
 }
 
 const char *Column::getName() const {

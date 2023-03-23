@@ -26,6 +26,9 @@ public:
     void readFromFile(std::ifstream &ifs);
 
 
+    void changeColumnName(const char *oldName, const char *newName);
+
+    void addRow(const Row& row);
 };
 
 
