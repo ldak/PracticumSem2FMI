@@ -15,20 +15,24 @@
 class MarkdownTableParser {
 private:
     Column columns[COLUMN_COUNT];
-    Row rows[ROW_COUNT];
     int rowCount = 0;
     int columnCount = 0;
+
     void printTable(std::ofstream &ofs) const;
+    void setColumnNames(std::ifstream &ifs);
+    void setColumnAlignment(std::ifstream &ifs);
+    void setRowsValues(std::ifstream &ifs);
 
 public:
     void printTable() const;
     void writeToFile(std::ofstream &ofs) const;
     void readFromFile(std::ifstream &ifs);
 
-
     void changeColumnName(const char *oldName, const char *newName);
 
-    void addRow(const Row& row);
+    void addRow(const char* row);
+
+    void setRowValues(const char *string, int i);
 };
 
 

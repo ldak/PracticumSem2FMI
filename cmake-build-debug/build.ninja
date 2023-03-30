@@ -79,6 +79,12 @@ build CMakeFiles/dr_1_zad1.dir/dr_1/HelperFunctions.cpp.obj: CXX_COMPILER__dr_1_
   OBJECT_DIR = CMakeFiles\dr_1_zad1.dir
   OBJECT_FILE_DIR = CMakeFiles\dr_1_zad1.dir\dr_1
 
+build CMakeFiles/dr_1_zad1.dir/dr_1/Value.cpp.obj: CXX_COMPILER__dr_1_zad1_Debug C$:/Users/MILEN_PC/CLionProjects/PractucumSem2/dr_1/Value.cpp || cmake_object_order_depends_target_dr_1_zad1
+  DEP_FILE = CMakeFiles\dr_1_zad1.dir\dr_1\Value.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\dr_1_zad1.dir
+  OBJECT_FILE_DIR = CMakeFiles\dr_1_zad1.dir\dr_1
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target dr_1_zad1
@@ -87,7 +93,7 @@ build CMakeFiles/dr_1_zad1.dir/dr_1/HelperFunctions.cpp.obj: CXX_COMPILER__dr_1_
 #############################################
 # Link the executable dr_1_zad1.exe
 
-build dr_1_zad1.exe: CXX_EXECUTABLE_LINKER__dr_1_zad1_Debug CMakeFiles/dr_1_zad1.dir/dr_1/Zad1.cpp.obj CMakeFiles/dr_1_zad1.dir/dr_1/MarkdownTableParser.cpp.obj CMakeFiles/dr_1_zad1.dir/dr_1/Column.cpp.obj CMakeFiles/dr_1_zad1.dir/dr_1/Row.cpp.obj CMakeFiles/dr_1_zad1.dir/dr_1/HelperFunctions.cpp.obj
+build dr_1_zad1.exe: CXX_EXECUTABLE_LINKER__dr_1_zad1_Debug CMakeFiles/dr_1_zad1.dir/dr_1/Zad1.cpp.obj CMakeFiles/dr_1_zad1.dir/dr_1/MarkdownTableParser.cpp.obj CMakeFiles/dr_1_zad1.dir/dr_1/Column.cpp.obj CMakeFiles/dr_1_zad1.dir/dr_1/Row.cpp.obj CMakeFiles/dr_1_zad1.dir/dr_1/HelperFunctions.cpp.obj CMakeFiles/dr_1_zad1.dir/dr_1/Value.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\dr_1_zad1.dir

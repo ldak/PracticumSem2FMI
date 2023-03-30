@@ -5,12 +5,10 @@
 #include "Column.h"
 
 
-Column::Column() {
-
-}
+Column::Column() = default;
 
 Column::Column(const char *name) {
-    strcpyWithoutSpaces(this->name, name);
+    this->setName(name);
 }
 
 void Column::setAlignment(Alignment align) {
@@ -18,31 +16,43 @@ void Column::setAlignment(Alignment align) {
 }
 
 void Column::setName(const char *name) {
-    strcpyWithoutSpaces(this->name, name);
-    if (this->columnSize < strLength(this->name) + 2)
-        this->columnSize = strLength(this->name) + 2;
+    this->name.setValue(name);
+    int nameLength = strLength(this->name.getValue());
+    this->setColumnSize(nameLength + 2);
 }
 
 const char *Column::getName() const {
-    return this->name;
+    return this->name.getValue();
 }
 
 void Column::setColumnSize(int columnSize) {
-    this->columnSize = columnSize;
+    if (this->columnSize < columnSize)
+        this->columnSize = columnSize;
 }
 
-void Column::printColumn() const {
-    printValueAligned(this->name);
+void Column::printColumnName() const {
+    this->printValueAligned(this->name.getValue());
 }
+
+void Column::printColumnValue(int index) const {
+    this->printValueAligned(this->values[index].getValue());
+}
+
 
 void Column::printValueAligned(const char* value) const{
     alignString(value, this->columnSize, this->alignment);
 }
 
-void Column::printColumn(std::ofstream& ofs) const {
+void Column::printColumnName(std::ofstream& ofs) const {
     if (!ofs.is_open())
         return;
-    printValueAligned(this->name, ofs);
+    this->printValueAligned(this->name.getValue(), ofs);
+}
+
+void Column::printColumnValue(int index, std::ofstream& ofs) const {
+    if (!ofs.is_open())
+        return;
+    this->printValueAligned(this->values[index].getValue(), ofs);
 }
 
 void Column::printValueAligned(const char *value, std::ofstream& ofs) const {
@@ -70,7 +80,7 @@ void Column::printAlignment(std::ofstream &ofs) const{
 }
 
 void Column::setAlignment(const char *align) {
-    char* alignCopy = new char[20];
+    char* alignCopy = new char[VALUE_LENGTH];
     strcpyWithoutSpaces(alignCopy, align);
     if (strCompare(alignCopy, ":---") == 0) {
         this->alignment = Alignment::LEFT;
@@ -85,6 +95,11 @@ int Column::getColumnSize() const{
     return this->columnSize;
 }
 
+void Column::setValue(char *string, int i) {
+    this->values[i].setValue(string);
+    int valueLength = strLength(this->values[i].getValue());
+    this->setColumnSize(valueLength + 2);
+}
 
 
 

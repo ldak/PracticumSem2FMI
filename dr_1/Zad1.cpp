@@ -11,7 +11,7 @@ void printMenu(){
     std::cout << "1. Print table" << std::endl;
     std::cout << "2. Change column name" << std::endl;
     std::cout << "3. Add row" << std::endl;
-    std::cout << "4. Remove column" << std::endl;
+    std::cout << "4. Change cell by <row number> and <column name>" << std::endl;
     std::cout << "5. Edit cell" << std::endl;
     std::cout << "6. Print table" << std::endl;
     std::cout << "7. Save table" << std::endl;

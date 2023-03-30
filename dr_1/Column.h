@@ -8,11 +8,13 @@
 #include "ConfigConst.h"
 #include <fstream>
 #include "HelperFunctions.h"
+#include "Value.h"
 
 
 class Column {
 private:
-    char name[VALUE_LENGTH]{};
+    Value name{};
+    Value values[ROW_COUNT]{};
     Alignment alignment = Alignment::LEFT;
     int columnSize = 0;
 public:
@@ -24,14 +26,19 @@ public:
     const char* getName() const;
     void setColumnSize(int columnSize);
 
-    void printColumn() const;
-    void printColumn(std::ofstream& ofs) const;
+    void printColumnName() const;
+    void printColumnValue(int index) const;
+    void printColumnName(std::ofstream& ofs) const;
+    void printColumnValue(int index, std::ofstream &ofs) const;
+
     void printValueAligned(const char* value) const;
     void printValueAligned(const char* value, std::ofstream& ofs) const;
 
     void printAlignment(std::ofstream &ofs) const;
 
     int getColumnSize() const;
+
+    void setValue(char *string, int i);
 };
 
 
