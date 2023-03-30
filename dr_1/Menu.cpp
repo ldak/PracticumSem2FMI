@@ -23,11 +23,10 @@ namespace Menu{
         char* newName = new char[20];
         std::cout << "Enter old name: ";
         std::cin >> oldName;
-//    std::cout << oldName;
         std::cout << "Enter new name: ";
         std::cin >> newName;
-        parser.changeColumnName(oldName, newName);
-
+        bool status = parser.changeColumnName(oldName, newName);
+        std::cout << (status? "Column name changed!" : "Column not found") << std::endl;
         delete[] oldName;
         delete[] newName;
     }
@@ -37,11 +36,26 @@ namespace Menu{
         std::cout << "Enter row in format: <value1> | <value2> | ... | <valueN>" << std::endl;
         std::cin.ignore();
         std::cin.getline(rowValue, 320);
-        parser.addRow(rowValue);
-        std::cout << "Row added!" << std::endl;
+        bool status = parser.addRow(rowValue);
+        std::cout << (status? "Row added!": "Couldn't add the row") << std::endl;
         delete[] rowValue;
     }
 
+    void changeCellByNameAndRow(MarkdownTableParser& parser) {
+        char* columnName = new char[20];
+        char* newValue = new char[20];
+        int rowNumber;
+        std::cout << "Enter column name: ";
+        std::cin >> columnName;
+        std::cout << "Enter row number: ";
+        std::cin >> rowNumber;
+        std::cout << "Enter new value: ";
+        std::cin >> newValue;
+        bool status = parser.changeCellByNameAndRow(columnName, rowNumber, newValue);
+        std::cout << (status? "Cell changed!" : "Cell not found") << std::endl;
+        delete[] columnName;
+        delete[] newValue;
+    }
 
     void saveTable(MarkdownTableParser &parser) {
         std::cout << "Enter file name:" << std::endl;

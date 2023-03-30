@@ -124,20 +124,38 @@ void MarkdownTableParser::readFromFile(std::ifstream &ifs) {
     this->setRowsValues(ifs);
 }
 
-void MarkdownTableParser::changeColumnName(const char *oldName, const char *newName) {
+int MarkdownTableParser::getColumnIndex(const char * name) const{
     for (int i = 0; i < this->columnCount; ++i) {
-        const char* name = this->columns[i].getName();
-        if (string_helper::strCompare(name, oldName) == 0){
-            this->columns[i].setName(newName);
-            return;
+        const char* columnName = this->columns[i].getName();
+        if (string_helper::strCompare(columnName, name) == 0){
+            return i;
         }
     }
-
+    return -1;
 }
 
-void MarkdownTableParser::addRow(const char* row) {
+bool MarkdownTableParser::changeColumnName(const char *oldName, const char *newName) {
+    int index = this->getColumnIndex(oldName);
+    if (index == -1)
+        return false;
+    this->columns[index].setName(newName);
+    return true;
+}
+
+bool MarkdownTableParser::addRow(const char* row) {
+    if (this->rowCount == ROW_COUNT - 1)
+        return false;
     this->setRowValues(row, this->rowCount);
     this->rowCount++;
+    return true;
+}
+
+bool MarkdownTableParser::changeCellByNameAndRow(char *columnName, int i, char *value) {
+    int index = this->getColumnIndex(columnName);
+    if (index == -1)
+        return false;
+    this->columns[index].setValue(value, i);
+    return true;
 }
 
 

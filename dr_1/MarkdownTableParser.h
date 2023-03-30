@@ -22,17 +22,21 @@ private:
     void setColumnNames(std::ifstream &ifs);
     void setColumnAlignment(std::ifstream &ifs);
     void setRowsValues(std::ifstream &ifs);
+    void setRowValues(const char *string, int i);
+
+    int getColumnIndex(const char *name) const;
 
 public:
     void printTable() const;
     void writeToFile(std::ofstream &ofs) const;
     void readFromFile(std::ifstream &ifs);
 
-    void changeColumnName(const char *oldName, const char *newName);
+    bool changeColumnName(const char *oldName, const char *newName);
 
-    void addRow(const char* row);
+    bool addRow(const char* row);
 
-    void setRowValues(const char *string, int i);
+    bool changeCellByNameAndRow(char *string, int i, char *string1);
+
 };
 
 
