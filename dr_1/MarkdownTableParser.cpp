@@ -103,8 +103,8 @@ void MarkdownTableParser::setRowValues(const char *row, int i) {
     std::stringstream ss(row);
     int j = 0;
     while(!ss.eof()){
-        if(ss.get() == '\n')
-            break;
+//        if(ss.peek() == '\n')
+//            break;
         char* value = new char[VALUE_LENGTH*2];
         ss.getline(value,VALUE_LENGTH*2, '|');
         this->columns[j].setValue(value, i);
