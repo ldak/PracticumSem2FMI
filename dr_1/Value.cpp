@@ -5,7 +5,7 @@
 #include "Value.h"
 
 void Value::setValue(const char *value) {
-    strcpyWithoutSpaces(this->value, value);
+    string_helper::strcpyWithoutSpaces(this->value, value);
 }
 
 const char* Value::getValue() const {

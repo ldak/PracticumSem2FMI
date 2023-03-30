@@ -6,6 +6,8 @@
 #include <fstream>
 
 
+void saveTable(MarkdownTableParser &parser);
+
 void printMenu(){
     std::cout << "Choose option:" << std::endl;
     std::cout << "1. Print table" << std::endl;
@@ -14,6 +16,7 @@ void printMenu(){
     std::cout << "4. Change cell by <row number> and <column name>" << std::endl;
     std::cout << "5. Edit cell" << std::endl;
     std::cout << "6. Print table" << std::endl;
+
     std::cout << "7. Save table" << std::endl;
     std::cout << "8. Load table" << std::endl;
     std::cout << "9. Exit" << std::endl;
@@ -29,6 +32,8 @@ void changeColumnName(MarkdownTableParser& parser) {
     std::cin >> newName;
     parser.changeColumnName(oldName, newName);
 
+    delete[] oldName;
+    delete[] newName;
 }
 
 void addRow(MarkdownTableParser& parser) {
@@ -36,17 +41,9 @@ void addRow(MarkdownTableParser& parser) {
     std::cout << "Enter row: ";
     std::cin.ignore();
     std::cin.getline(rowValue, 320);
-    std::stringstream ss(rowValue);
-    Row row{};
-    int i = 0;
-    while(!ss.eof()){
-        char* value = new char[20];
-        ss >> value;
-        row.setValue( value, i++);
-    }
-    parser.addRow(row);
+    parser.addRow(rowValue);
     std::cout << "Row added!" << std::endl;
-
+    delete[] rowValue;
 }
 
 void programLoop(MarkdownTableParser& parser){
@@ -64,6 +61,8 @@ void programLoop(MarkdownTableParser& parser){
             case '3':
                 addRow(parser);
                 break;
+            case '7':
+                saveTable(parser);
             default:
                 std::cout << "Invalid option!" << std::endl;
                 break;
@@ -71,8 +70,24 @@ void programLoop(MarkdownTableParser& parser){
     }while(option != '9');
 }
 
+void saveTable(MarkdownTableParser &parser) {
+    std::cout << "Enter file name:" << std::endl;
+    char* fileName = new char[2000];
+    std::cin >> fileName;
+    std::ofstream ofs(fileName);
+    delete[] fileName;
+
+    parser.writeToFile(ofs);
+    ofs.close();
+    std::cout << "Table saved!" << std::endl;
+}
+
 void loadTable(MarkdownTableParser& parser) {
-    std::ifstream ifs("table.md");
+    std::cout << "Enter table file name:" << std::endl;
+    char* fileName = new char[2000];
+    std::cin >> fileName;
+    std::ifstream ifs(fileName);
+    delete[] fileName;
 
     parser.readFromFile(ifs);
     std::cout << "table --------------" << std::endl;

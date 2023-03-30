@@ -16,8 +16,9 @@ void Column::setAlignment(Alignment align) {
 }
 
 void Column::setName(const char *name) {
+
     this->name.setValue(name);
-    int nameLength = strLength(this->name.getValue());
+    int nameLength = string_helper::strLength(this->name.getValue());
     this->setColumnSize(nameLength + 2);
 }
 
@@ -40,7 +41,7 @@ void Column::printColumnValue(int index) const {
 
 
 void Column::printValueAligned(const char* value) const{
-    alignString(value, this->columnSize, this->alignment);
+    string_helper::alignString(value, this->columnSize, this->alignment);
 }
 
 void Column::printColumnName(std::ofstream& ofs) const {
@@ -58,7 +59,7 @@ void Column::printColumnValue(int index, std::ofstream& ofs) const {
 void Column::printValueAligned(const char *value, std::ofstream& ofs) const {
     if (!ofs.is_open())
         return;
-    alignString(value, this->columnSize, this->alignment, ofs);
+    string_helper::alignString(value, this->columnSize, this->alignment, ofs);
 }
 
 void Column::printAlignment(std::ofstream &ofs) const{
@@ -81,14 +82,15 @@ void Column::printAlignment(std::ofstream &ofs) const{
 
 void Column::setAlignment(const char *align) {
     char* alignCopy = new char[VALUE_LENGTH];
-    strcpyWithoutSpaces(alignCopy, align);
-    if (strCompare(alignCopy, ":---") == 0) {
+    string_helper::strcpyWithoutSpaces(alignCopy, align);
+    if (string_helper::strCompare(alignCopy, ":---") == 0) {
         this->alignment = Alignment::LEFT;
-    } else if (strCompare(alignCopy, "---:") == 0) {
+    } else if (string_helper::strCompare(alignCopy, "---:") == 0) {
         this->alignment = Alignment::RIGHT;
-    } else if (strCompare(alignCopy, ":----:") == 0) {
+    } else if (string_helper::strCompare(alignCopy, ":----:") == 0) {
         this->alignment = Alignment::CENTER;
     }
+    delete[] alignCopy;
 }
 
 int Column::getColumnSize() const{
@@ -97,7 +99,7 @@ int Column::getColumnSize() const{
 
 void Column::setValue(char *string, int i) {
     this->values[i].setValue(string);
-    int valueLength = strLength(this->values[i].getValue());
+    int valueLength = string_helper::strLength(this->values[i].getValue());
     this->setColumnSize(valueLength + 2);
 }
 

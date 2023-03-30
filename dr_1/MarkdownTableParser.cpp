@@ -61,12 +61,13 @@ void MarkdownTableParser::setColumnNames(std::ifstream &ifs) {
         return;
 
     while (!ifs.eof()) {
-        char *value = new char[20];
+        char *value = new char[VALUE_LENGTH*2];
         if (ifs.get() == '\n')
             break;
-        ifs.getline(value, 20, '|');
+        ifs.getline(value, VALUE_LENGTH*2, '|');
 //        std::cout << value << std::endl;
         this->columns[this->columnCount++].setName(value);
+        delete[] value;
 //        this->columns[this->columnCount-1].printColumn();
     }
 }
@@ -78,9 +79,10 @@ void MarkdownTableParser::setColumnAlignment(std::ifstream &ifs) {
     while(!ifs.eof()){
         if(ifs.get() == '\n' || ifs.eof())
             break;
-        char *value = new char[20];
+        char *value = new char[VALUE_LENGTH*2];
         ifs.getline(value, 20, '|');
-        this->columns[i].setAlignment(value);
+        this->columns[i++].setAlignment(value);
+        delete[] value;
     }
 }
 void MarkdownTableParser::setRowsValues(std::ifstream &ifs) {
@@ -89,10 +91,11 @@ void MarkdownTableParser::setRowsValues(std::ifstream &ifs) {
     while(!ifs.eof()){
         if(ifs.get() == '\n' || ifs.eof())
             break;
-        char *row = new char[300];
-        ifs.getline(row, 300);
+        char *row = new char[VALUE_LENGTH*2*COLUMN_COUNT];
+        ifs.getline(row, VALUE_LENGTH*2*COLUMN_COUNT);
         this->setRowValues(row, this->rowCount);
         this->rowCount++;
+        delete[] row;
     }
 }
 
@@ -102,10 +105,11 @@ void MarkdownTableParser::setRowValues(const char *row, int i) {
     while(!ss.eof()){
         if(ss.get() == '\n')
             break;
-        char* value = new char[20];
-        ss.getline(value,40, '|');
+        char* value = new char[VALUE_LENGTH*2];
+        ss.getline(value,VALUE_LENGTH*2, '|');
         this->columns[j].setValue(value, i);
         j++;
+        delete[] value;
     }
 }
 
@@ -123,7 +127,7 @@ void MarkdownTableParser::readFromFile(std::ifstream &ifs) {
 void MarkdownTableParser::changeColumnName(const char *oldName, const char *newName) {
     for (int i = 0; i < this->columnCount; ++i) {
         const char* name = this->columns[i].getName();
-        if (strCompare(name, oldName) == 0){
+        if (string_helper::strCompare(name, oldName) == 0){
             this->columns[i].setName(newName);
             return;
         }
