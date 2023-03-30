@@ -15,6 +15,11 @@ namespace Menu {
 
     void addRow(MarkdownTableParser& parser);
 
+    void changeCellByNameAndRow(MarkdownTableParser& parser);
+
+    void changeCellByNameAndValue(MarkdownTableParser& parser);
+
+    void selectByValue(MarkdownTableParser& parser);
 
     void saveTable(MarkdownTableParser &parser);
 }

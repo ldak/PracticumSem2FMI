@@ -103,5 +103,17 @@ void Column::setValue(char *string, int i) {
     this->setColumnSize(valueLength + 2);
 }
 
+void Column::changeValue(char *oldValue, char *newValue) {
+    for (int i = 0; i < ROW_COUNT; ++i) {
+        if (string_helper::strCompare(this->values[i].getValue(), oldValue) == 0) {
+            this->values[i].setValue(newValue);
+        }
+    }
+}
+
+bool Column::isValueEqual(char *value, int i) {
+    return string_helper::strCompare(this->values[i].getValue(), value) == 0;
+}
+
 
 

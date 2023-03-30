@@ -39,6 +39,10 @@ public:
     int getColumnSize() const;
 
     void setValue(char *string, int i);
+
+    void changeValue(char *oldValue, char *newValue);
+
+    bool isValueEqual(char *value, int i);
 };
 
 

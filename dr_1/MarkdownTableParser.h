@@ -26,6 +26,10 @@ private:
 
     int getColumnIndex(const char *name) const;
 
+    void printColumnNames() const;
+    void printTableDivisor() const;
+    void printRow(int index) const;
+
 public:
     void printTable() const;
     void writeToFile(std::ofstream &ofs) const;
@@ -37,6 +41,9 @@ public:
 
     bool changeCellByNameAndRow(char *string, int i, char *string1);
 
+    bool changeCellByNameAndValue(char *columnName, char *oldValue, char *newValue);
+
+    void selectByValue(char *columnName, char *value);
 };
 
 

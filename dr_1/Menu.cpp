@@ -11,8 +11,9 @@ namespace Menu{
         std::cout << "1. Print table" << std::endl;
         std::cout << "2. Change column name" << std::endl;
         std::cout << "3. Add row" << std::endl;
-        std::cout << "4. Change cell by <row number> and <column name>" << std::endl;
-
+        std::cout << "4. Change cell by <column name> and <row number>" << std::endl;
+        std::cout << "5. Change cell by <column name> and <value>" << std::endl;
+        std::cout << "6. Select by <column name> and <value>" << std::endl;
 
         std::cout << "7. Save table" << std::endl;
         std::cout << "9. Exit" << std::endl;
@@ -55,6 +56,35 @@ namespace Menu{
         std::cout << (status? "Cell changed!" : "Cell not found") << std::endl;
         delete[] columnName;
         delete[] newValue;
+    }
+
+    void changeCellByNameAndValue(MarkdownTableParser& parser) {
+        char* columnName = new char[20];
+        char* newValue = new char[20];
+        char* oldValue = new char[20];
+        std::cout << "Enter column name: ";
+        std::cin >> columnName;
+        std::cout << "Enter old value: ";
+        std::cin >> oldValue;
+        std::cout << "Enter new value: ";
+        std::cin >> newValue;
+        bool status = parser.changeCellByNameAndValue(columnName, oldValue, newValue);
+        std::cout << (status? "Cell changed!" : "Cell not found") << std::endl;
+        delete[] columnName;
+        delete[] newValue;
+        delete[] oldValue;
+    }
+
+    void selectByValue(MarkdownTableParser& parser) {
+        char* columnName = new char[20];
+        char* value = new char[20];
+        std::cout << "Enter column name: ";
+        std::cin >> columnName;
+        std::cout << "Enter value: ";
+        std::cin >> value;
+        parser.selectByValue(columnName, value);
+        delete[] columnName;
+        delete[] value;
     }
 
     void saveTable(MarkdownTableParser &parser) {

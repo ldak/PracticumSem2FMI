@@ -36,9 +36,18 @@ void programLoop(MarkdownTableParser& parser){
             case '3':
                 Menu::addRow(parser);
                 break;
-
+            case '4':
+                Menu::changeCellByNameAndRow(parser);
+                break;
+            case '5':
+                Menu::changeCellByNameAndValue(parser);
+                break;
+            case '6':
+                Menu::selectByValue(parser);
+                break;
             case '7':
                 Menu::saveTable(parser);
+                break;
             default:
                 std::cout << "Invalid option!" << std::endl;
                 break;

@@ -5,11 +5,23 @@
 #include "MarkdownTableParser.h"
 
 void MarkdownTableParser::printTable() const{
+    this->printColumnNames();
+    this->printTableDivisor();
+
+    for (int i = 0; i < this->rowCount; ++i) {
+       this->printRow(i);
+    }
+}
+
+void MarkdownTableParser::printColumnNames() const{
     for (int i = 0; i < this->columnCount; ++i) {
         std::cout << "|";
         this->columns[i].printColumnName();
     }
     std::cout << "|" << std::endl;
+}
+
+void MarkdownTableParser::printTableDivisor() const{
     for (int i = 0; i < this->columnCount ; ++i) {
         std::cout << "| ";
         for (int j = 0; j < this->columns[i].getColumnSize() - 2; ++j) {
@@ -18,14 +30,14 @@ void MarkdownTableParser::printTable() const{
         std::cout << " ";
     }
     std::cout << "|" << std::endl;
+}
 
-    for (int i = 0; i < this->rowCount; ++i) {
-        for (int j = 0; j <this->columnCount ; ++j) {
-            std::cout << "|";
-            this->columns[j].printColumnValue(i);
-        }
-        std::cout << "|" << std::endl;
+void MarkdownTableParser::printRow(int index) const {
+    for (int j = 0; j <this->columnCount ; ++j) {
+        std::cout << "|";
+        this->columns[j].printColumnValue(index);
     }
+    std::cout << "|" << std::endl;
 }
 
 void MarkdownTableParser::writeToFile(std::ofstream &ofs) const{
@@ -154,8 +166,30 @@ bool MarkdownTableParser::changeCellByNameAndRow(char *columnName, int i, char *
     int index = this->getColumnIndex(columnName);
     if (index == -1)
         return false;
-    this->columns[index].setValue(value, i);
+    this->columns[index].setValue(value, i + 1);
     return true;
+}
+
+bool MarkdownTableParser::changeCellByNameAndValue(char *columnName, char *oldValue, char *newValue) {
+    int index = this->getColumnIndex(columnName);
+    if (index == -1)
+        return false;
+    this->columns[index].changeValue(oldValue, newValue);
+    return true;
+}
+
+void MarkdownTableParser::selectByValue(char *columnName, char *value) {
+    int index = this->getColumnIndex(columnName);
+    if (index == -1){
+        std::cout << "Column not found" << std::endl;
+        return;
+    }
+    this->printColumnNames();
+    this->printTableDivisor();
+    for (int i = 0; i < this->rowCount; ++i) {
+        if (this->columns[index].isValueEqual(value, i))
+            this->printRow(i);
+    }
 }
 
 
