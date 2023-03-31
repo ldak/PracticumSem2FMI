@@ -48,6 +48,7 @@ void programLoop(MarkdownTableParser& parser){
             case '7':
                 Menu::saveTable(parser);
                 break;
+            case '9': break;
             default:
                 std::cout << "Invalid option!" << std::endl;
                 break;

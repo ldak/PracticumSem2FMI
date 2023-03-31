@@ -1,3 +1,0 @@
-C:/Users/MILEN_PC/CLionProjects/PractucumSem2/cmake-build-debug/CMakeFiles/dr_1_zad1.dir
-C:/Users/MILEN_PC/CLionProjects/PractucumSem2/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/MILEN_PC/CLionProjects/PractucumSem2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
