@@ -54,9 +54,9 @@ public:
 
     void changeFileRights(const char* fileName, char role, char right);
 
-    void printFileInfo(const char* fileName) const;
+    void printFileInfo(const char* fileName, char role) const;
 
-    void printFileContent(const char* fileName) const;
+    void printFileContent(const char* fileName, char role) const;
 
     void printAllFiles() const;
 

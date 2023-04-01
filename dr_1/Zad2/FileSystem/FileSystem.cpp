@@ -6,7 +6,7 @@
 #include "FileSystem.h"
 
 FileSystem::FileSystem(unsigned filesCount) {
-    this->filesCount = filesCount;
+    this->filesCount = 0;
     this->files = new File[filesCount];
 }
 
@@ -85,6 +85,7 @@ void FileSystem::deleteFile(const char *fileName, char role) {
     for (int i = index + 1; i < this->filesCount; ++i) {
         this->files[i - 1] = this->files[i];
     }
+    this->filesCount--;
 }
 
 
@@ -111,23 +112,23 @@ void FileSystem::free() {
     this->filesCount = 0;
 }
 
-void FileSystem::printFileInfo(const char *fileName) const {
+void FileSystem::printFileInfo(const char *fileName, char role) const {
     int index = this->findFile(fileName);
     if (index == -1){
         std::cout << "Error! File not found!" << std::endl;
         return;
     }
-    this->files[index].printInfo();
+    this->files[index].printInfo(role);
 
 }
 
-void FileSystem::printFileContent(const char *fileName) const {
+void FileSystem::printFileContent(const char *fileName, char role) const {
     int index = this->findFile(fileName);
     if (index == -1){
         std::cout << "Error! File not found!" << std::endl;
         return;
     }
-    this->files[index].printContent();
+    this->files[index].printContent(role);
 }
 
 void FileSystem::printAllFiles() const {
@@ -135,16 +136,6 @@ void FileSystem::printAllFiles() const {
         std::cout << this->files[i].getName() << std::endl;
     }
 
-}
-
-
-int FileSystem::findFile(const char *fileName) const {
-    for (int i = 0; i < this->filesCount; ++i) {
-        if (strcmp(this->files[i].getName(), fileName) == 0) {
-            return i;
-        }
-    }
-    return -1;
 }
 
 void FileSystem::sort(SortOptions option) {
@@ -158,9 +149,15 @@ void FileSystem::sort(SortOptions option) {
         File temp = this->files[i];
         this->files[i] = this->files[minIndex];
         this->files[minIndex] = temp;
-
     }
-
-
 }
 
+
+int FileSystem::findFile(const char *fileName) const {
+    for (int i = 0; i < this->filesCount; ++i) {
+        if (strcmp(this->files[i].getName(), fileName) == 0) {
+            return i;
+        }
+    }
+    return -1;
+}

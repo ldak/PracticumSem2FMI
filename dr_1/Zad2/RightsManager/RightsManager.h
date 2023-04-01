@@ -6,7 +6,7 @@
 #define PRACTUCUMSEM2_RIGHTSMANAGER_H
 
 
-#include "../RightsGroup/RightsGroup.h"
+#include "RightsGroup/RightsGroup.h"
 
 class RightsManager {
 private:

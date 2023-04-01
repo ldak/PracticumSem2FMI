@@ -6,8 +6,8 @@
 #define PRACTUCUMSEM2_DATETIME_H
 
 
-#include "../Date/Date.h"
-#include "../Time/Time.h"
+#include "Date/Date.h"
+#include "Time/Time.h"
 
 class DateTime {
 private:

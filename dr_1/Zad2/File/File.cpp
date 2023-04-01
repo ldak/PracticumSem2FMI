@@ -9,6 +9,7 @@ File::File(const char *fileName, unsigned hour, unsigned minute, unsigned second
            unsigned year, const char *rights) {
     this->setName(fileName);
     this->setCreationDate(hour, minute, second, day, month, year);
+    this->setLastModifiedDate(hour, minute, second, day, month, year);
     this->setRights(rights);
 }
 
@@ -81,7 +82,11 @@ void File::changeRight(char role, char right) {
 
 }
 
-void File::printInfo() {
+void File::printInfo(char role) {
+    if (!this->rightsManager.canRead(role)) {
+        std::cout << "Error! You don't have permission to read this file!" << std::endl;
+        return;
+    }
     std::cout << "File name: " << this->fileName << std::endl;
     std::cout << "File size: " << this->size << std::endl;
     std::cout << "File creation date: ";
@@ -92,7 +97,11 @@ void File::printInfo() {
     this->rightsManager.print();
 }
 
-void File::printContent() {
+void File::printContent(char role) {
+    if (!this->rightsManager.canRead(role)) {
+        std::cout << "Error! You don't have permission to read this file!" << std::endl;
+        return;
+    }
     std::cout << "File content: " << std::endl;
     std::cout << this->content << std::endl;
 }

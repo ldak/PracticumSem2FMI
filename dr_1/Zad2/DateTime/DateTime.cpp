@@ -22,6 +22,7 @@ bool DateTime::isBefore(const DateTime& other) const {
         return true;
 
     if(this->date.isEqualTo(other.date) && this->time.isBefore(other.time))
+        return true;
 
     return false;
 }

@@ -5,9 +5,9 @@
 #include "RightsManager.h"
 
 RightsManager::RightsManager(const char *rights) {
-    this->user = RightsGroup(rights[0] != '-', rights[1] != '-', rights[2] != '-');
-    this->owner = RightsGroup(rights[3] != '-', rights[4] != '-', rights[5] != '-');
-    this->other = RightsGroup(rights[6] != '-', rights[7] != '-', rights[8] != '-');
+    this->user = RightsGroup(rights[0] == 'r', rights[1] == 'w', rights[2] == 'x');
+    this->owner = RightsGroup(rights[3] == 'r', rights[4] == 'w', rights[5] == 'x');
+    this->other = RightsGroup(rights[6] == 'r', rights[7] == 'w', rights[8] == 'x');
 
 }
 

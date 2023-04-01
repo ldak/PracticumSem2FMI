@@ -71,9 +71,9 @@ public:
 
     void changeRight(char role, char right);
 
-    void printInfo();
+    void printInfo(char role);
 
-    void printContent();
+    void printContent(char role);
 
     bool canDelete(char role);
 
