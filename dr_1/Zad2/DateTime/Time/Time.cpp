@@ -124,3 +124,7 @@ void Time::print(bool is12hoursclock) const
 	if (is12hoursclock)
 		std::cout << ((hours > 12) ? "PM" : "AM");
 }
+
+bool Time::isBefore(const Time &other) const {
+    return this->compare(other) < 0;
+}

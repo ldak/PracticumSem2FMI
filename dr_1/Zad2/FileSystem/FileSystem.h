@@ -7,6 +7,7 @@
 
 
 #include "../File/File.h"
+#include "../SortOptions/SortOptions.h"
 
 class FileSystem {
 private:
@@ -38,6 +39,28 @@ public:
                   unsigned month,
                   unsigned year,
                   char role);
+
+    void addTextToFile(const char* fileName,
+                  const char* content,
+                  unsigned hour,
+                  unsigned minute,
+                  unsigned second,
+                  unsigned day,
+                  unsigned month,
+                  unsigned year,
+                  char role);
+
+    void deleteFile(const char* fileName, char role);
+
+    void changeFileRights(const char* fileName, char role, char right);
+
+    void printFileInfo(const char* fileName) const;
+
+    void printFileContent(const char* fileName) const;
+
+    void printAllFiles() const;
+
+    void sort(SortOptions option);
 
 
     FileSystem() = delete;

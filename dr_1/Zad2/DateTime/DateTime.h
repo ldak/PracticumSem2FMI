@@ -18,6 +18,9 @@ public:
     DateTime(unsigned hour, unsigned minute, unsigned second, unsigned day, unsigned month, unsigned year);
 
 
+    void print();
+
+    bool isBefore(const DateTime& time) const;
 };
 
 

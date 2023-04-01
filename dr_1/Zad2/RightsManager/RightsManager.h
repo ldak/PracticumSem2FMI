@@ -20,6 +20,10 @@ public:
     bool canWrite(char role);
     bool canRead(char role);
     bool canExecute(char role);
+
+    void changeRight(char role, char right);
+
+    void print();
 };
 
 

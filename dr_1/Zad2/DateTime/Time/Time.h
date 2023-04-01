@@ -33,6 +33,8 @@ public:
 	int compare(const Time& other) const;
 	Time getDiff(const Time& other) const;
 
+    bool isBefore(const Time& other) const;
+
 	Time getToMidnight() const;
 	bool isPartyTime() const;//23:00  05;00
 	bool isDinnerTime() const;//19:30  21:30

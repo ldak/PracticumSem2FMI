@@ -1,0 +1,14 @@
+//
+// Created by MILEN_PC on 4/1/2023.
+//
+
+#ifndef PRACTUCUMSEM2_SORTOPTIONS_H
+#define PRACTUCUMSEM2_SORTOPTIONS_H
+
+enum class SortOptions{
+    NAME,
+    CREATION_DATE,
+    MODIFICATION_DATE,
+    SIZE
+};
+#endif //PRACTUCUMSEM2_SORTOPTIONS_H

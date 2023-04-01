@@ -103,7 +103,7 @@ bool Date::isEqualTo(const Date& other) const
 
 void Date::print() const
 {
-	std::cout << day << "." << month << "." << year << std::endl;
+	std::cout << day << "." << month << "." << year;
 }
 
 
@@ -113,4 +113,21 @@ bool Date::isLeapYear() const
 		return year % 4 == 0;
 	else
 		return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+}
+
+bool Date::isBefore(const Date &other) const {
+    if (this->year < other.year)
+        return true;
+    if (this->year > other.year)
+        return false;
+
+    if (this->month < other.month)
+        return true;
+    if (this->month > other.month)
+        return false;
+
+    if (this->day < other.day)
+        return true;
+
+    return false;
 }

@@ -40,3 +40,24 @@ bool RightsManager::canExecute(char role) {
 
     return this->other.canExecute();
 }
+
+void RightsManager::changeRight(char role, char right) {
+    if (role == 'u'){
+        this->user.changeRight(right);
+        return;
+    }
+
+    if (role == 'g'){
+        this->owner.changeRight(right);
+        return;
+    }
+
+    this->other.changeRight(right);
+}
+
+void RightsManager::print() {
+    this->user.print();
+    this->owner.print();
+    this->other.print();
+    std::cout << std::endl;
+}

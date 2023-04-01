@@ -28,6 +28,7 @@ public:
 	void setYear(unsigned year);
 
 	bool isEqualTo(const Date& d) const;
+    bool isBefore(const Date& other) const;
 
 	void print() const;
 	void goToNextDay();
