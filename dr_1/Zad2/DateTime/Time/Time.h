@@ -1,4 +1,6 @@
-#pragma once
+/**
+ * Source: https://github.com/Angeld55/Object-oriented_programming_FMI/tree/master/Week%2005/Time
+ */
 #pragma once
 #include <iostream>
 

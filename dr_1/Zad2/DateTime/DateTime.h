@@ -1,6 +1,3 @@
-//
-// Created by MILEN_PC on 3/31/2023.
-//
 
 #ifndef PRACTUCUMSEM2_DATETIME_H
 #define PRACTUCUMSEM2_DATETIME_H

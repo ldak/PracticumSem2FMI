@@ -1,3 +1,6 @@
+/**
+ * Source: https://github.com/Angeld55/Object-oriented_programming_FMI/tree/master/Week%2005/Time
+ */
 #include "Time.h"
 
 Time::Time(size_t hours, size_t mins, size_t seconds)
