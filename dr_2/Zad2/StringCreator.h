@@ -11,7 +11,7 @@
 
 class StringCreator {
 private:
-    StringPiece* pieces;
+    StringPiece** pieces;
     size_t count = 0;
     size_t capacity = 0;
     void copyFrom(const StringCreator& other);

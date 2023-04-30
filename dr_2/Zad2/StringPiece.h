@@ -11,7 +11,8 @@
 
 class StringPiece {
     char data[CONSTS::STRING_PIECE_SIZE];
-    int size = 0 ;
+    int start = 0;
+    int end = 0;
 public:
     StringPiece();
     StringPiece(const char *str);
