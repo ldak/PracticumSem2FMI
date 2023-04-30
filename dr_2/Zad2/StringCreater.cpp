@@ -125,3 +125,23 @@ void StringCreator::resize() {
     this->pieces = temp;
 
 }
+
+StringCreator::StringCreator(StringCreator &&rhs) noexcept {
+    moveFrom(std::move(rhs));
+}
+
+StringCreator &StringCreator::operator=(StringCreator &&other) noexcept {
+    if (this != &other){
+        this->free();
+        this->moveFrom(std::move(other));
+    }
+    return *this;
+}
+
+
+void StringCreator::moveFrom(StringCreator &&other) {
+    this->lastIndex = other.lastIndex;
+    this->capacity = other.capacity;
+    this->pieces = other.pieces;
+    other.pieces = nullptr;
+}

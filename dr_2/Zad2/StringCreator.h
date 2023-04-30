@@ -16,10 +16,13 @@ private:
     size_t capacity = 0;
     void copyFrom(const StringCreator& other);
     void free();
+    void moveFrom(StringCreator&& other);
 public:
     explicit StringCreator(size_t capacity);
     StringCreator(const StringCreator& other);
     StringCreator& operator=(const StringCreator& other);
+    StringCreator(StringCreator &&rhs) noexcept ;
+    StringCreator& operator=( StringCreator&& other) noexcept ;
     ~StringCreator();
 
     void addPiece(const char* piece = "");

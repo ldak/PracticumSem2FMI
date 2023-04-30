@@ -147,7 +147,6 @@ std::istream& operator>>(std::istream& is, MyString& str)
 MyString::MyString(char *&&data) {
     this->_data = data;
     this->_length = strlen(data);
-
 }
 
 

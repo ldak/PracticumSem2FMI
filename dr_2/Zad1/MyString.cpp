@@ -16,13 +16,13 @@ MyString operator+(const MyString& lhs, const MyString& rhs)
 
     if (result.isSmall()){
         result.string.small.data[0] = '\0';
-        strcat(result.string.small.data, lhs.string.small.data);
-        strcat(result.string.small.data, rhs.string.small.data);
+        strcat(result.string.small.data, lhs.c_str());
+        strcat(result.string.small.data, rhs.c_str());
         return result;
     }
     result.string.big.data[0] = '\0';
-    strcat(result.string.big.data, lhs.string.big.data);
-    strcat(result.string.big.data, rhs.string.big.data);
+    strcat(result.string.big.data, lhs.c_str());
+    strcat(result.string.big.data, rhs.c_str());
 
 	return result;
 }
@@ -30,19 +30,21 @@ MyString operator+(const MyString& lhs, const MyString& rhs)
 MyString& MyString::operator+=(const MyString& other)
 {
     size_t newLength = this->length() + other.length();
-    if (newLength < sizeof(this->string)){
-        strcat(this->string.small.data, other.string.small.data);
+    if (newLength < sizeof(this->string) - 1){
+        strcat(this->string.small.data, other.c_str());
         return *this;
     }
 
-	char* result = new char[this->length() + other.length() + 1];
+	char* result = new char[newLength + 1];
 	result[0] = '\0'; 
-	strcat(result, this->string.big.data);
-	strcat(result, other.string.big.data);
+	strcat(result, this->c_str());
+	strcat(result, other.c_str());
 
-	delete[] this->string.big.data;
+    if(!isSmall())
+	    delete[] this->string.big.data;
 	this->string.big.data = result;
-
+    this->string.big.length = strlen(result);
+    this->string.big.capacity = strlen(result) + 1;
 	return *this;
 }
 
@@ -107,7 +109,7 @@ void MyString::copyFrom(const MyString& other)
     }
     this->string.big.length = other.string.big.length;
     this->string.big.capacity = other.string.big.capacity;
-    this->string.big.data = new char[this->string.big.capacity + 1];
+    this->string.big.data = new char[this->string.big.capacity];
     strcpy(this->string.big.data, other.string.big.data);
 }
 
