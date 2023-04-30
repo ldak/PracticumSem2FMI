@@ -15,16 +15,15 @@ public:
 
 	MyString();
 	MyString(const char* data);
+    MyString(char* &&data);
 	MyString(const MyString& other);
 	MyString& operator=(const MyString& other);
 	~MyString();
 
-	//move semantics on the next lecture
-	//MyString(MyString&& other) = delete; 
-	//MyString& operator=(MyString&& other) = delete; 
-	///
+    MyString(MyString&& other);
+    MyString& operator=(MyString&& other);
 
-	size_t length() const;
+    size_t length() const;
 	MyString& operator+=(const MyString& other);
 
 	MyString substr(size_t begin, size_t howMany) const;

@@ -7,11 +7,12 @@
 
 void StringPiece::setData(const char *str) {
     this->start = 0;
-    this->end = strlen(str) - 1;
+    int strLength = strlen(str);
+    this->end = strLength == 0 ? 0 : strLength - 1;
     if (this->end >= 16)
         throw std::invalid_argument("String is too long");
-    int i =0;
-    while(str[i] != '\0'){
+    int i = 0;
+    while (str[i] != '\0') {
         this->data[i] = str[i];
         i++;
     }
@@ -20,35 +21,41 @@ void StringPiece::setData(const char *str) {
 
 const char *StringPiece::getData() const {
     int size = this->getSize();
-    char* temp = new char[size + 1];
+    char *temp = new char[size + 1];
     temp[size] = '\0';
-    for (int i = this->start; i != this->end + 1 ; i = (i + 1) % CONSTS::STRING_PIECE_SIZE) {
+    for (int i = this->start; i <= this->end; i = (i + 1) % CONSTS::STRING_PIECE_SIZE) {
         temp[i] = this->data[i];
     }
     return temp;
 }
 
 void StringPiece::operator<<(const char *str) {
-    int length = strlen(str);
-    if (length + this->getSize() > CONSTS::STRING_PIECE_SIZE)
+    int strSize = strlen(str);
+
+    int pieceSize = this->getSize();
+    if (strSize + pieceSize > CONSTS::STRING_PIECE_SIZE)
         throw std::invalid_argument("String is too long");
-    int i =0;
-    while(str[i] != '\0'){
-        this->data[this->end + i] = str[i];
+    int i = 0;
+    while (str[i] != '\0') {
+        this->operator[](pieceSize + i) = str[i];
         i++;
     }
-    this->end += length;
+    if(pieceSize == 0)
+        this->end = (this->end + strSize - 1) % CONSTS::STRING_PIECE_SIZE;
+    else
+        this->end = (this->end + strSize) % CONSTS::STRING_PIECE_SIZE;
+
 }
 
-void operator>>(const char* str, StringPiece &piece) {
-    int length = strlen(str) - 1;
+void operator>>(const char *str, StringPiece &piece) {
+    int length = strlen(str);
     int size = piece.getSize();
     if (length + size > CONSTS::STRING_PIECE_SIZE)
         throw std::invalid_argument("String is too long");
 
     piece.start = (piece.start + CONSTS::STRING_PIECE_SIZE - length) % CONSTS::STRING_PIECE_SIZE;
     for (int i = 0; i < length; i++) {
-        piece.data[(piece.start + i) % CONSTS::STRING_PIECE_SIZE] = str[i];
+        piece[i] = str[i];
     }
 }
 
@@ -61,7 +68,7 @@ void StringPiece::removeFirst(int i) {
 void StringPiece::removeLast(int i) {
     if (i > this->getSize())
         throw std::invalid_argument("String is too short");
-    this->end -= i;
+    this->end = (CONSTS::STRING_PIECE_SIZE + this->end - i) % CONSTS::STRING_PIECE_SIZE;
 }
 
 char StringPiece::operator[](int i) const {
@@ -77,9 +84,12 @@ StringPiece::StringPiece(const char *str) {
 }
 
 int StringPiece::getSize() const {
-    return this->start <= this->end
-        ? this->end - this->start + 1
-        : CONSTS::STRING_PIECE_SIZE - this->start + this->end + 1;
+    if (this->start == this->end)
+        return 0;
+    if(this->start < this->end)
+        return this->end -this->start + 1;
+
+    return CONSTS::STRING_PIECE_SIZE - this->start + this->end + 1;
 }
 
 static int reverse(int num) {
@@ -100,16 +110,24 @@ static int numLength(int num) {
     return length;
 }
 
-
 void StringPiece::operator<<(int num) {
-    if (numLength(num) + this->getSize() > CONSTS::STRING_PIECE_SIZE)
+    int numSize = numLength(num);
+    if (numSize == 0)
+        return;
+
+    int pieceSize = this->getSize();
+    if (numSize + pieceSize > CONSTS::STRING_PIECE_SIZE)
         throw std::invalid_argument("String is too long");
 
-    int reversed = reverse(num);
-    while(reversed != 0){
-        this->data[this->end++] = reversed % 10 + '0';
-        reversed /= 10;
+    int i = 0;
+    while (i < numSize) {
+        this->operator[](pieceSize + i++) = (num / (int) pow(10, numSize - i - 1)) % 10 + '0';
     }
+
+    if(pieceSize == 0)
+        this->end = (this->end + numSize - 1) % CONSTS::STRING_PIECE_SIZE;
+    else
+        this->end = (this->end + numSize) % CONSTS::STRING_PIECE_SIZE;
 
 }
 
@@ -121,8 +139,8 @@ void operator>>(int num, StringPiece &piece) {
     piece.start = (piece.start + CONSTS::STRING_PIECE_SIZE - length) % CONSTS::STRING_PIECE_SIZE;
 
     for (int i = 0; i < length; i++) {
-        piece.data[(piece.start + i) % CONSTS::STRING_PIECE_SIZE] = num % 10 + '0';
-        num /= 10;
+        int a = (num / (int) pow(10, length - i - 1)) % 10;
+        piece[i] = a + '0';
     }
 }
 

@@ -8,6 +8,7 @@
 
 #include "Consts.h"
 #include "cstring"
+#include "cmath"
 
 class StringPiece {
     char data[CONSTS::STRING_PIECE_SIZE];

@@ -9,11 +9,10 @@ int main() {
     sc.addPiece("test");
     sc.addPiece();
     sc.addPiece("football");
-
-
     sc[1] << " friends ";
     " Hello " >> sc[1];
     10 >> sc[2];
+    sc[2] << 10;
 
     MyString result1 = sc.getString(); // "test Hello friends 10football"
     std::cout << result1 << std::endl;

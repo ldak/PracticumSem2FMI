@@ -35,6 +35,26 @@ MyString::MyString() : MyString(1)
 	_data[0] = '\0';
 }
 
+MyString::MyString(MyString&& other)
+{
+    _data = other._data;
+    other._data = nullptr;
+    _length = other._length;
+}
+
+MyString& MyString::operator=(MyString&& other)
+{
+    if (this != &other)
+    {
+        free();
+        _data = other._data;
+        other._data = nullptr;
+        _length = other._length;
+    }
+    return *this;
+}
+
+
 MyString::MyString(const char* data) : MyString(strlen(data) + 1)
 {
 	strcpy(_data, data);	
@@ -122,6 +142,12 @@ std::istream& operator>>(std::istream& is, MyString& str)
 	str._data = new char[str._length + 1];
 	strcpy(str._data, buff);
 	return is;
+}
+
+MyString::MyString(char *&&data) {
+    this->_data = data;
+    this->_length = strlen(data);
+
 }
 
 

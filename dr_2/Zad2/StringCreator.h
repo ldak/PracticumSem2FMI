@@ -12,7 +12,7 @@
 class StringCreator {
 private:
     StringPiece** pieces;
-    size_t count = 0;
+    size_t lastIndex = 0;
     size_t capacity = 0;
     void copyFrom(const StringCreator& other);
     void free();
