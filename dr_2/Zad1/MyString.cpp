@@ -35,6 +35,11 @@ MyString& MyString::operator+=(const MyString& other)
         return *this;
     }
 
+    if (!this->isSmall() && newLength <= this->string.big.capacity - 1){
+        strcat(this->string.big.data, other.c_str());
+        return *this;
+    }
+
 	char* result = new char[newLength + 1];
 	result[0] = '\0'; 
 	strcat(result, this->c_str());
