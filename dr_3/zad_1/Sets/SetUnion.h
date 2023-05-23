@@ -17,6 +17,8 @@ public:
     SetUnion(MyVector<Set*> &&other);
 
     bool contains(int element) const override;
+    ~SetUnion() override;
+
 
 };
 

@@ -22,3 +22,9 @@ bool SetIntersection::contains(int element) const {
 
     return true;
 }
+
+SetIntersection::~SetIntersection() {
+    for (int i = 0; i < this->sets.size(); ++i) {
+        delete this->sets[i];
+    }
+}

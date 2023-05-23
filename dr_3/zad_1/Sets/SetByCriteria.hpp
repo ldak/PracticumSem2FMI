@@ -13,9 +13,12 @@ private:
 public:
     explicit SetByCriteria(T predicate) : predicate(predicate) {}
 
-    bool contains(int element) const override {
-        return predicate(element);
-    }
+    bool contains(int element) const override;
 };
+
+template<typename T>
+bool SetByCriteria<T>::contains(int element) const {
+    return predicate(element);
+}
 
 #endif //PRACTUCUMSEM2_SETBYCRITERIA_HPP

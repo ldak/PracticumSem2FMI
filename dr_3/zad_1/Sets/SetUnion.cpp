@@ -22,3 +22,9 @@ bool SetUnion::contains(int element) const {
     }
     return false;
 }
+
+SetUnion::~SetUnion() {
+    for (int i = 0; i < sets.size(); ++i) {
+        delete sets[i];
+    }
+}

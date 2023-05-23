@@ -16,6 +16,7 @@ public:
     explicit SetIntersection(const MyVector<Set*>& sets);
     explicit SetIntersection(MyVector<Set*>&& sets);
     bool contains(int element) const override;
+    ~SetIntersection() override;
 
 };
 
