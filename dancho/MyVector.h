@@ -7,15 +7,15 @@ class MyVector {
 private:
     T* _array;
     size_t _size = 0;
-    size_t _cappacity = 0;
+    size_t _capacity = 0;
 
-    void copy(const MyVector<T>& other);
-    void erase();
+    void copyFrom(const MyVector<T> &other);
+    void free();
     void resize();
 public:
-    explicit MyVector(size_t cappacity);
+    explicit MyVector(size_t capacity);
 
-    MyVector(const T* array, size_t size, size_t cappacity);
+    MyVector(const T* array, size_t size, size_t capacity);
 
     MyVector(const MyVector& other);
 
@@ -23,11 +23,11 @@ public:
 
     ~MyVector();
 
-    void AddToEnd(const T& arg);
-    void AddToPosition(size_t position, const T& arg);
-    void RemoveAtPosition(size_t positon);
+    void add(const T& arg);
+    void add(size_t position, const T& arg);
+    void remove(size_t positon);
     size_t Size() const;
-    void EndToStart();
+    void reverse();
 
     T operator[](size_t i) const;
     T& operator[](size_t i);
