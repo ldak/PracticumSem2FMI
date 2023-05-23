@@ -11,7 +11,7 @@ class SetByCriteria : public Set {
 private:
     T predicate;
 public:
-    explicit SetByCriteria(T predicate) : predicate(predicate) {}
+    explicit SetByCriteria(T predicate);
 
     bool contains(int element) const override;
 };
@@ -20,5 +20,8 @@ template<typename T>
 bool SetByCriteria<T>::contains(int element) const {
     return predicate(element);
 }
+
+template<typename T>
+SetByCriteria<T>::SetByCriteria(T predicate) : predicate(predicate) {}
 
 #endif //PRACTUCUMSEM2_SETBYCRITERIA_HPP

@@ -8,6 +8,7 @@ static MyVector<int> getNumbersFromFile(std::ifstream &ifstream, unsigned short 
     int *elements = new int[n];
     ifstream.read((char *) elements, sizeof(int) * n);
     MyVector<int> elementsVector(elements, n);
+    delete[] elements;
     return elementsVector;
 }
 
