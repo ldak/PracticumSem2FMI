@@ -35,6 +35,8 @@ public:
 
 	friend MyString operator+(const MyString& lhs, const MyString& rhs);
 	friend std::istream& operator>>(std::istream&, MyString& str);
+
+    void loadBinary(std::istream &ifstream);
 };
 MyString operator+(const MyString& lhs, const MyString& rhs);
 

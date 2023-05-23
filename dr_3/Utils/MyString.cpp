@@ -149,6 +149,26 @@ MyString::MyString(char *&&data) {
     this->_length = strlen(data);
 }
 
+void MyString::loadBinary(std::istream &istream) {
+    char buff[1024];
+    int i = 0;
+    while(true) {
+        buff[i++] = istream.get();
+        if (istream.eof()) {
+            break;
+        }
+        if (buff[i - 1] == '\0') {
+            break;
+        }
+    }
+    this->free();
+    this->_length = strlen(buff);
+    this->_data = new char[this->_length + 1];
+    strcpy(this->_data, buff);
+
+
+}
+
 
 bool operator<(const MyString& lhs, const MyString& rhs)
 {

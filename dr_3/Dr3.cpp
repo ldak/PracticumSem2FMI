@@ -57,9 +57,10 @@ Set *loadFifthType(std::ifstream& ifstream, unsigned short n) {
     MyVector<Set*> sets;
     for (int i = 0; i < n; ++i) {
         MyString fileName;
-        ifstream >> fileName;
+        fileName.loadBinary(ifstream);
         std::cout << fileName << std::endl;
-        sets.push_back(loadFromFile(fileName));
+        Set* set = loadFromFile(fileName);
+        sets.push_back(set);
     }
     SetIntersection* set = new SetIntersection(std::move(sets));
 
