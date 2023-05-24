@@ -9,6 +9,7 @@ class Set {
 public:
     virtual bool contains(int ) const = 0;
     virtual ~Set() = default;
+    virtual Set* clone() const = 0;
 };
 
 #endif //PRACTUCUMSEM2_SET_H

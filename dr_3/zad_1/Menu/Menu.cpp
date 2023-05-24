@@ -35,7 +35,7 @@ static void intervalsLoop(Set *set) {
     } while (true);
 }
 
-static void programLoop(Set *set) {
+static void nextItemLoop(Set *set) {
     int i = 0;
     do {
         std::cout << "Enter 0 for exit" << std::endl;
@@ -59,7 +59,7 @@ void Menu::startProgram(const MyString &fileName) {
     if (mode == 1) {
         intervalsLoop(set);
     } else {
-        programLoop(set);
+        nextItemLoop(set);
     }
     delete set;
 }

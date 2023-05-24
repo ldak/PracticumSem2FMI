@@ -28,3 +28,7 @@ SetUnion::~SetUnion() {
         delete sets[i];
     }
 }
+
+Set *SetUnion::clone() const {
+    return new SetUnion(*this);
+}

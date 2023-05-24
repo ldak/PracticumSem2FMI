@@ -28,3 +28,7 @@ SetIntersection::~SetIntersection() {
         delete this->sets[i];
     }
 }
+
+Set *SetIntersection::clone() const {
+    return new SetIntersection(*this);
+}

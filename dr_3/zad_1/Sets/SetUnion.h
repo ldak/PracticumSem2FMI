@@ -18,6 +18,7 @@ public:
 
     bool contains(int element) const override;
     ~SetUnion() override;
+    Set * clone() const override
 
 
 };

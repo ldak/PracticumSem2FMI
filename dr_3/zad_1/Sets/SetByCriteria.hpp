@@ -14,7 +14,13 @@ public:
     explicit SetByCriteria(T predicate);
 
     bool contains(int element) const override;
+    Set * clone() const override;
 };
+
+template<typename T>
+Set *SetByCriteria<T>::clone() const {
+    return new SetByCriteria<T>(*this);
+}
 
 template<typename T>
 bool SetByCriteria<T>::contains(int element) const {

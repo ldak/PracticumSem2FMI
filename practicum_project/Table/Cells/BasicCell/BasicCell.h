@@ -8,8 +8,8 @@
 
 class BasicCell {
 public:
-    virtual void print() const;
-    virtual double getValue() const;
+    virtual void print() const = 0;
+    virtual double getValue() const = 0;
     virtual ~BasicCell() = default;
 };
 
