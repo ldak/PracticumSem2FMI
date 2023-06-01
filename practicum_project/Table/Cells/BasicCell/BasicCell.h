@@ -4,13 +4,15 @@
 
 #ifndef PRACTUCUMSEM2_BASICCELL_H
 #define PRACTUCUMSEM2_BASICCELL_H
-
+#include <iostream>
 
 class BasicCell {
 public:
-    virtual void print() const = 0;
+    virtual void print( std::ostream& os) const = 0;
     virtual double getValue() const = 0;
+    virtual int getLength() const = 0;
     virtual ~BasicCell() = default;
+    virtual BasicCell* clone() const = 0;
 };
 
 

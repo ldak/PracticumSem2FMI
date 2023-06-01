@@ -6,8 +6,20 @@
 #define PRACTUCUMSEM2_STRINGCELL_H
 
 
-class StringCell {
+#include "../BasicCell/BasicCell.h"
+#include "../../../Utils/MyString/MyString.h"
 
+class StringCell : public BasicCell {
+private:
+    MyString value;
+public:
+    explicit StringCell(const MyString &value);
+    explicit StringCell(MyString &&value);
+
+    void print(std::ostream &os) const override;
+    int getLength() const override;
+    double getValue() const override;
+    BasicCell * clone() const override;
 };
 
 
