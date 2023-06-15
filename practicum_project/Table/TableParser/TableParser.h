@@ -6,7 +6,14 @@
 #define PRACTUCUMSEM2_TABLEPARSER_H
 
 
+#include "../../Utils/MyVector/MyVector.hpp"
+#include "../Row/Row.h"
+
 class TableParser {
+private:
+    MyVector<Row> rows;
+public:
+    void print();
 
 };
 
