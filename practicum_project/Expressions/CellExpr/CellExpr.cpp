@@ -19,8 +19,8 @@ CellExpr::CellExpr(const MyString &expr) {
     while(expr[i] != 'C') {
         i++;
     }
-    this->row = expr.substr(1, i).toInt();
-    this->col = expr.substr(i + 1, expr.length()).toInt();
+    this->row = expr.substr(1, i - 1).toInt();
+    this->col = expr.substr(i + 1, expr.length() - i - 1).toInt();
 
 }
 

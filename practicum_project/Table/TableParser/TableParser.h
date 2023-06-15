@@ -14,8 +14,9 @@
 class TableParser {
 private:
     MyVector<Row> rows;
-
+    MyVector<int> alignments;
     void setFunctionCellRefs();
+    void setAlignments();
 public:
 
     friend std::istream &operator>>(std::istream &in, TableParser &tableParser);

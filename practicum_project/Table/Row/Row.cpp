@@ -78,3 +78,29 @@ const SharedPtr<BasicCell> &Row::operator[](int index) const {
     return this->cells[index];
 }
 
+void Row::setAlignments(MyVector<int>& vector) {
+    for (int i = 0; i < this->cells.size(); ++i) {
+        int cellAlignment = this->cells[i]->getLength();
+        if (vector.size() == i){
+            vector.push_back(cellAlignment);
+            continue;
+        }
+        if (cellAlignment > vector[i]){
+            vector[i] = cellAlignment;
+        }
+    }
+}
+
+void Row::print(std::ostream &os, MyVector<int> alignments) const {
+    os << "| ";
+    for (int i = 0; i < this->cells.size(); ++i) {
+        this->cells[i]->print(os);
+        for (int j = this->cells[i]->getLength(); j < alignments[i]; ++j) {
+            os << ' ';
+        }
+        os << " | ";
+    }
+}
+
+
+

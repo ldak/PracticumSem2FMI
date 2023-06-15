@@ -31,7 +31,7 @@ SharedPtr<BasicExpr> ExprFactory::createExpr(const MyString &string) {
             i++;
         char operation = string[i];
         SharedPtr<BasicExpr> op = createOperationExpr(operation);
-        if (result->getPriority() < op->getPriority()){
+        if (result->getPriority() > op->getPriority()){
             op->setLeft(std::move(result));
             result = op;
         }
@@ -41,7 +41,7 @@ SharedPtr<BasicExpr> ExprFactory::createExpr(const MyString &string) {
         i++;
         while(string[i] == ' ')
             i++;
-        SharedPtr<BasicExpr> right = createValueExpr(string, i);
+        SharedPtr<BasicExpr> right = createValueExpr(string, i, i);
         result->setRight(std::move(right));
     }
 
@@ -58,9 +58,11 @@ SharedPtr<BasicExpr> ExprFactory::createValueExpr(const MyString &expr, int star
           && index < expr.length())
         index++;
 
-    MyString subString = expr.substr(start, index);
+    MyString subString = expr.substr(start, index - start);
     if (subString[0] != 'R') {
-        return SharedPtr<BasicExpr>(new LiteralExpr(subString.toDouble()));
+        double value = subString.isInt()? subString.toInt() :subString.toDouble();
+
+        return SharedPtr<BasicExpr>(new LiteralExpr(value));
     }
     SharedPtr<BasicExpr> cellExpr = SharedPtr<BasicExpr>(new CellExpr(subString));
     WeakPtr<BasicExpr> weakCellExpr( cellExpr);

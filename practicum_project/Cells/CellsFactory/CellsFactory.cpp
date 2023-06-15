@@ -39,9 +39,6 @@ SharedPtr<BasicCell> CellsFactory::createCell(const MyString &content) {
     SharedPtr<BasicExpr> expr = exprFactory->createExpr(string);
 
     return new FormulaCell(expr);
-
-
-    return nullptr;
 }
 
 CellsFactory::CellsFactory() {

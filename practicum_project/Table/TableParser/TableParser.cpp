@@ -14,11 +14,14 @@ std::istream &operator>>(std::istream &in, TableParser &tableParser){
         tableParser.rows.push_back(row);
     }
     tableParser.setFunctionCellRefs();
+    tableParser.setAlignments();
+    return in;
 }
 
 std::ostream &operator<<(std::ostream &out, TableParser &tableParser) {
     for (int i = 0; i < tableParser.rows.size(); ++i) {
-        out << tableParser.rows[i] << std::endl;
+         tableParser.rows[i].print(out, tableParser.alignments);
+         out << std::endl;
     }
 }
 
@@ -33,9 +36,17 @@ void TableParser::setFunctionCellRefs() {
     CellsFactory* cellsFactory = CellsFactory::getInstance();
     MyVector<WeakPtr<BasicExpr>> cellExprs = cellsFactory->getCellExprToFill();
     for (int i = 0; i < cellExprs.size(); ++i) {
-        CellExpr& cellExpr = (CellExpr&)*cellExprs[i];
-        cellExpr.setCell(this->getCell(cellExpr.getRow(), cellExpr.getCol()));
+        if (cellExprs[i].expired())
+            continue;
+        CellExpr* cellExpr = dynamic_cast<CellExpr*>(cellExprs[i].get());
+        cellExpr->setCell(this->getCell(cellExpr->getRow(), cellExpr->getCol()));
     }
 
+}
+
+void TableParser::setAlignments() {
+    for (int i = 0; i < rows.size(); ++i) {
+        rows[i].setAlignments(this->alignments);
+    }
 }
 

@@ -211,7 +211,7 @@ double MyString::toDouble() const{
     int i = 0;
     if (_data[0] == '-' || _data[0] == '+')
         i++;
-    for (; _data[i] != '.'; i++) {
+    for (; _data[i] != '.'&& _data[i] != ','; i++) {
         res *= 10;
         res += _data[i] - '0';
     }

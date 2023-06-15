@@ -26,8 +26,15 @@ public:
     const T* operator->() const;
     T* operator->();
 
+    T* get();
+
 	bool expired() const;
 };
+
+template<typename T>
+T *WeakPtr<T>::get() {
+    return data;
+}
 
 template <typename T>
 WeakPtr<T>::WeakPtr()
