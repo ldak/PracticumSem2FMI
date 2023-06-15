@@ -6,6 +6,8 @@
 #include "../IntCell/IntCell.h"
 #include "../DoubleCell/DoubleCell.h"
 #include "../StringCell/StringCell.h"
+#include "../../Expressions/ExprFactory/ExprFactory.h"
+#include "../FormulaCell/FormulaCell.h"
 
 CellsFactory* CellsFactory::instance = nullptr;
 
@@ -19,6 +21,7 @@ CellsFactory *CellsFactory::getInstance() {
 void CellsFactory::freeInstance() {
     delete instance;
     instance = nullptr;
+    ExprFactory::freeInstance();
 }
 
 SharedPtr<BasicCell> CellsFactory::createCell(const MyString &content) {
@@ -33,7 +36,10 @@ SharedPtr<BasicCell> CellsFactory::createCell(const MyString &content) {
 
     if (string[0] != '=')
         return new StringCell(string);
+    ExprFactory* exprFactory = ExprFactory::getInstance();
+    SharedPtr<BasicExpr> expr = exprFactory->createExpr(string);
 
+    return new FormulaCell(expr);
 
 
     return nullptr;

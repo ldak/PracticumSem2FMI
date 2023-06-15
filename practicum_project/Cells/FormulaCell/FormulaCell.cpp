@@ -21,3 +21,7 @@ void FormulaCell::print(std::ostream &os) const {
 
 
 }
+
+FormulaCell::FormulaCell(const SharedPtr<BasicExpr> &expr) {
+    this->expr = expr;
+}

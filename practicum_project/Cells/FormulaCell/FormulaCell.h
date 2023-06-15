@@ -8,11 +8,14 @@
 
 #include "../BasicCell/BasicCell.h"
 #include "../../Utils/MyVector/MyVector.hpp"
+#include "../../Expressions/BasicExpr/BasicExpr.h"
 
-class FormulaCell: BasicCell {
+class FormulaCell: public BasicCell {
 private:
+    SharedPtr<BasicExpr> expr;
 public:
     FormulaCell() = default;
+    FormulaCell(const SharedPtr<BasicExpr> &expr);
     double getValue() const override;
     int getLength() const override;
     void print(std::ostream &os) const override;

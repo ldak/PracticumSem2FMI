@@ -13,3 +13,13 @@ double CellExpr::getValue() const {
 SharedPtr<BasicExpr> CellExpr::clone() const {
     return new CellExpr(*this);
 }
+
+CellExpr::CellExpr(const MyString &expr) {
+    int i = 2;
+    while(expr[i] != 'C') {
+        i++;
+    }
+    this->row = expr.substr(1, i).toInt();
+    this->col = expr.substr(i + 1, expr.length()).toInt();
+
+}

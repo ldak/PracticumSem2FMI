@@ -5,6 +5,8 @@
 #include "DivisionExpr.h"
 
 double DivisionExpr::getValue() const {
+    if (right->getValue() == 0)
+        throw std::invalid_argument("Division by zero!");
     return left->getValue() / right->getValue();
 }
 

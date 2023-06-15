@@ -48,13 +48,13 @@ void WeakPtr<T>::moveFrom(WeakPtr<T>&& other)
 
 
 template <typename T>
-WeakPtr<T>::WeakPtr(WeakPtr<T>&& other)
+WeakPtr<T>::WeakPtr(WeakPtr<T>&& other) noexcept
 {
 	moveFrom(std::move(other));
 }
 
 template <typename T>
-WeakPtr<T>& WeakPtr<T>::operator=(WeakPtr<T>&& other)
+WeakPtr<T>& WeakPtr<T>::operator=(WeakPtr<T>&& other) noexcept
 {
 	if (this != &other)
 	{

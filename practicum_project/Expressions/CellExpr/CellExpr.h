@@ -9,6 +9,7 @@
 #include "../../Cells/BasicCell/BasicCell.h"
 #include "../../Utils/WeakPtr/WeakPtr.hpp"
 #include "../ValueExpr/ValueExpr.h"
+#include "../../Utils/MyString/MyString.h"
 
 class CellExpr: public ValueExpr{
 private:
@@ -16,6 +17,7 @@ private:
     int col;
     WeakPtr<BasicCell> cell;
 public:
+    CellExpr(const MyString& expr);
     double getValue() const override;
     SharedPtr<BasicExpr> clone() const override;
 };

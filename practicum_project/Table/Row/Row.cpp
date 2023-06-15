@@ -62,7 +62,6 @@ std::istream &operator>>(std::istream &in, Row &row) {
         char buffer[1024];
         in.getline(buffer, 1024, ',');
         row.cells.push_back(factory->createCell(buffer));
-
     }
     return in;
 }
