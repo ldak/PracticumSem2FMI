@@ -7,17 +7,16 @@
 
 
 #include "../BasicCell/BasicCell.h"
-#include "../../../Utils/MyVector/MyVector.hpp"
+#include "../../Utils/MyVector/MyVector.hpp"
 
 class FormulaCell: BasicCell {
 private:
-    MyVector<BasicCell*> cells;
 public:
     FormulaCell() = default;
     double getValue() const override;
     int getLength() const override;
     void print(std::ostream &os) const override;
-    BasicCell * clone() const override;
+    SharedPtr<BasicCell> clone() const override;
 
 };
 

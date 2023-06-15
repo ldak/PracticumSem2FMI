@@ -8,14 +8,20 @@
 
 #include "../../Utils/MyVector/MyVector.hpp"
 #include "../Row/Row.h"
+#include <iostream>
+#include <sstream>
 
 class TableParser {
 private:
     MyVector<Row> rows;
 public:
-    void print();
+
+    friend std::istream &operator>>(std::istream &in, TableParser &tableParser);
+    friend std::ostream &operator<<(std::ostream &out, TableParser &tableParser);
 
 };
 
+std::istream &operator>>(std::istream &in, TableParser &tableParser);
+std::ostream &operator<<(std::ostream &out, TableParser &tableParser);
 
 #endif //PRACTUCUMSEM2_TABLEPARSER_H

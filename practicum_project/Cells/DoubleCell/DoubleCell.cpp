@@ -16,7 +16,7 @@ int DoubleCell::getLength() const {
     return HelperFunctions::findLength(this->value);
 }
 
-BasicCell *DoubleCell::clone() const {
+SharedPtr<BasicCell>DoubleCell::clone() const {
     return new DoubleCell(*this);
 }
 

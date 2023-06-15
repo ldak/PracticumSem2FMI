@@ -15,7 +15,6 @@ public:
 
 	MyString();
 	MyString(const char* data);
-    MyString(char* &&data);
 	MyString(const MyString& other);
 	MyString& operator=(const MyString& other);
 	~MyString();
@@ -28,6 +27,9 @@ public:
 
 	MyString substr(size_t begin, size_t howMany) const;
 
+    MyString clearStartWhitespaces() const;
+    MyString clearEndWhitespaces() const;
+
 	char& operator[](size_t index);
 	char operator[](size_t index) const;
 	
@@ -36,7 +38,13 @@ public:
 	friend MyString operator+(const MyString& lhs, const MyString& rhs);
 	friend std::istream& operator>>(std::istream&, MyString& str);
 
-    void loadBinary(std::istream &ifstream);
+    bool isInt() const;
+
+    int toInt() const;
+
+    bool isDouble() const;
+
+    double toDouble() const;
 };
 MyString operator+(const MyString& lhs, const MyString& rhs);
 

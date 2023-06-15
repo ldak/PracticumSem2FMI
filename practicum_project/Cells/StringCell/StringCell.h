@@ -7,7 +7,7 @@
 
 
 #include "../BasicCell/BasicCell.h"
-#include "../../../Utils/MyString/MyString.h"
+#include "../../Utils/MyString/MyString.h"
 
 class StringCell : public BasicCell {
 private:
@@ -19,7 +19,7 @@ public:
     void print(std::ostream &os) const override;
     int getLength() const override;
     double getValue() const override;
-    BasicCell * clone() const override;
+    SharedPtr<BasicCell> clone() const override;
 };
 
 

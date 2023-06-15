@@ -5,6 +5,7 @@
 #ifndef PRACTUCUMSEM2_BASICCELL_H
 #define PRACTUCUMSEM2_BASICCELL_H
 #include <iostream>
+#include "../../Utils/SharedPtr/SharedPtr.hpp"
 
 class BasicCell {
 public:
@@ -12,7 +13,7 @@ public:
     virtual double getValue() const = 0;
     virtual int getLength() const = 0;
     virtual ~BasicCell() = default;
-    virtual BasicCell* clone() const = 0;
+    virtual SharedPtr<BasicCell> clone() const = 0;
 };
 
 

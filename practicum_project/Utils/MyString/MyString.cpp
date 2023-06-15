@@ -144,29 +144,86 @@ std::istream& operator>>(std::istream& is, MyString& str)
 	return is;
 }
 
-MyString::MyString(char *&&data) {
-    this->_data = data;
-    this->_length = strlen(data);
+MyString MyString::clearStartWhitespaces() const {
+    int i = 0;
+    while (_data[i] == ' ' || _data[i] == '\t' && i < _length) {
+        i++;
+    }
+    return this->substr(i, _length - i);
 }
 
-void MyString::loadBinary(std::istream &istream) {
-    char buff[1024];
-    int i = 0;
-    while(true) {
-        buff[i++] = istream.get();
-        if (istream.eof()) {
-            break;
-        }
-        if (buff[i - 1] == '\0') {
-            break;
-        }
+MyString MyString::clearEndWhitespaces() const {
+    int i = _length - 1;
+    while (_data[i] == ' ' || _data[i] == '\t' && i > 0) {
+        i--;
     }
-    this->free();
-    this->_length = strlen(buff);
-    this->_data = new char[this->_length + 1];
-    strcpy(this->_data, buff);
+    return this->substr(0, i + 1);
+}
 
+bool MyString::isInt() const{
+    if ((_data[0] > '9' || _data[0] < '0') && _data[0] != '-' && _data[0] != '+')
+        return false;
+    for (int i = 1; i < _length; i++) {
+        if (_data[i] > '9' || _data[i] < '0')
+            return false;
+    }
+    return true;
+}
 
+int MyString::toInt() const{
+    if (!isInt())
+        throw std::invalid_argument("Error, string is not int");
+    int res = 0;
+    int i = 0;
+    if (_data[0] == '-' || _data[0] == '+')
+        i++;
+    for (; i < _length; i++) {
+        res *= 10;
+        res += _data[i] - '0';
+    }
+    if (_data[0] == '-')
+        res *= -1;
+    return res;
+}
+
+bool MyString::isDouble() const {
+    if ((_data[0] > '9' || _data[0] < '0') && _data[0] != '-' && _data[0] != '+')
+        return false;
+    int i = 1;
+    for (; i < _length; i++) {
+        if (_data[i] > '9' || _data[i] < '0')
+            break;
+    }
+    if (_data[i] != '.')
+        return false;
+    i++;
+    for (; i < _length; i++) {
+        if (_data[i] > '9' || _data[i] < '0')
+            return false;
+    }
+    return true;
+}
+
+double MyString::toDouble() const{
+    if (!isDouble())
+        throw std::invalid_argument("Error, string is not double");
+    double res = 0;
+    int i = 0;
+    if (_data[0] == '-' || _data[0] == '+')
+        i++;
+    for (; _data[i] != '.'; i++) {
+        res *= 10;
+        res += _data[i] - '0';
+    }
+    i++;
+    double dec = 0.1;
+    for (; i < _length; i++) {
+        res += (_data[i] - '0') * dec;
+        dec /= 10;
+    }
+    if (_data[0] == '-')
+        res *= -1;
+    return res;
 }
 
 

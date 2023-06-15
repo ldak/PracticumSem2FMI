@@ -24,6 +24,6 @@ double StringCell::getValue() const {
     return 0;
 }
 
-BasicCell *StringCell::clone() const {
+SharedPtr<BasicCell>StringCell::clone() const {
     return new StringCell(*this);
 }

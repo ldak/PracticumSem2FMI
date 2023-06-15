@@ -21,6 +21,11 @@ public:
 	WeakPtr& operator=(WeakPtr<T>&& other) noexcept ;
 	~WeakPtr();
 
+    const T& operator*() const;
+    T& operator*();
+    const T* operator->() const;
+    T* operator->();
+
 	bool expired() const;
 };
 
@@ -117,4 +122,34 @@ template <typename T>
 bool WeakPtr<T>::expired() const
 { 
 	return counter && counter->useCount == 0;
+}
+
+template <typename T>
+const T& WeakPtr<T>::operator*() const
+{
+    if(data == nullptr)
+    {
+        throw std::runtime_error("Pointer not set");
+    }
+    return *data;
+}
+
+template <typename T>
+T& WeakPtr<T>::operator*()
+{
+    if(data == nullptr)
+    {
+        throw std::runtime_error("Pointer not set");
+    }
+    return *data;
+}
+
+template<typename T>
+T* WeakPtr<T>::operator->() {
+    return data;
+}
+
+template<typename T>
+const T* WeakPtr<T>::operator->() const {
+    return data;
 }

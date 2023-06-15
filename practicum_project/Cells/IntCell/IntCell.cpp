@@ -20,6 +20,6 @@ double IntCell::getValue() const {
     return this->value;
 }
 
-BasicCell *IntCell::clone() const {
+SharedPtr<BasicCell>IntCell::clone() const {
     return new IntCell(*this);
 }

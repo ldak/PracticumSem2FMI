@@ -7,7 +7,7 @@
 
 
 #include "../BasicCell/BasicCell.h"
-#include "../../../Utils/HelperFunctions/HelperFunctions.h"
+#include "../../Utils/HelperFunctions/HelperFunctions.h"
 
 class DoubleCell: public BasicCell {
 private:
@@ -21,7 +21,7 @@ public:
 
     int getLength() const override;
 
-    BasicCell* clone() const override;
+    SharedPtr<BasicCell> clone() const override;
 };
 
 

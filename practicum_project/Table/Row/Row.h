@@ -7,8 +7,8 @@
 
 
 #include "../../Utils/MyVector/MyVector.hpp"
-#include "../Cells/BasicCell/BasicCell.h"
 #include "../../Utils/SharedPtr/SharedPtr.hpp"
+#include "../../Cells/CellsFactory/CellsFactory.h"
 
 class Row {
 private:
@@ -27,7 +27,12 @@ public:
     Row(Row&& other) noexcept;
     Row& operator=(Row&& row) noexcept;
     ~Row();
+
+    friend std::istream &operator>>(std::istream &in, Row &row);
+    friend std::ostream &operator<<(std::ostream &out, const Row &row);
 };
 
+std::istream &operator>>(std::istream &in, Row &row);
+std::ostream &operator<<(std::ostream &out, const Row &row);
 
 #endif //PRACTUCUMSEM2_ROW_H

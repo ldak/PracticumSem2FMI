@@ -7,7 +7,7 @@
 
 
 #include "../BasicCell/BasicCell.h"
-#include "../../../Utils/HelperFunctions/HelperFunctions.h"
+#include "../../Utils/HelperFunctions/HelperFunctions.h"
 
 class IntCell: public BasicCell{
 private:
@@ -17,7 +17,7 @@ public:
     int getLength() const override;
     void print(std::ostream &os) const override;
     double getValue() const override;
-    BasicCell * clone() const override;
+    SharedPtr<BasicCell> clone() const override;
 };
 
 

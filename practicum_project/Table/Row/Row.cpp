@@ -56,3 +56,14 @@ Row::~Row() {
     this->free();
 }
 
+std::istream &operator>>(std::istream &in, Row &row) {
+    CellsFactory* factory = CellsFactory::getInstance();
+    while(!in.eof()){
+        char buffer[1024];
+        in.getline(buffer, 1024, ',');
+        row.cells.push_back(factory->createCell(buffer));
+
+    }
+    return in;
+}
+

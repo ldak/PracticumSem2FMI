@@ -12,7 +12,7 @@ int FormulaCell::getLength() const {
     return 0;
 }
 
-BasicCell *FormulaCell::clone() const {
+SharedPtr<BasicCell>FormulaCell::clone() const {
 
     return new FormulaCell(*this);
 }
