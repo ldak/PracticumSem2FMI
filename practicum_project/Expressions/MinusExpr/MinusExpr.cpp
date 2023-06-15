@@ -15,3 +15,9 @@ double MinusExpr::getValue() const {
 SharedPtr<BasicExpr> MinusExpr::clone() const {
     return new MinusExpr(*this);
 }
+
+void MinusExpr::print(std::ostream &os) const {
+    left->print(os);
+    os << " - ";
+    right->print(os);
+}

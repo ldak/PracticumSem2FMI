@@ -17,6 +17,7 @@ public:
     virtual void setRight(SharedPtr<BasicExpr>&& right) = 0;
     virtual ~BasicExpr() = default;
     virtual SharedPtr<BasicExpr> clone() const = 0;
+    virtual void print(std::ostream& os) const = 0;
 };
 
 

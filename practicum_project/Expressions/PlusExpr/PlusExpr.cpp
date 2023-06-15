@@ -15,3 +15,10 @@ double PlusExpr::getValue() const {
 SharedPtr<BasicExpr> PlusExpr::clone() const {
     return SharedPtr<BasicExpr>(new PlusExpr(*this));
 }
+
+void PlusExpr::print(std::ostream &os) const {
+    left->print(os);
+    os << "+";
+    right->print(os);
+
+}

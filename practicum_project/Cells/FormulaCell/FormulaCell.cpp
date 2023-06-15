@@ -3,13 +3,14 @@
 //
 
 #include "FormulaCell.h"
+#include "../../Utils/HelperFunctions/HelperFunctions.h"
 
 double FormulaCell::getValue() const {
-    return 0;
+    return expr->getValue();
 }
 
 int FormulaCell::getLength() const {
-    return 0;
+    return HelperFunctions::findLength(this->getValue());
 }
 
 SharedPtr<BasicCell>FormulaCell::clone() const {
@@ -18,10 +19,16 @@ SharedPtr<BasicCell>FormulaCell::clone() const {
 }
 
 void FormulaCell::print(std::ostream &os) const {
-
-
+    expr->print(os);
+//    os << this->getValue();
 }
 
 FormulaCell::FormulaCell(const SharedPtr<BasicExpr> &expr) {
     this->expr = expr;
+}
+
+std::ostream &operator<<(std::ostream &os, const FormulaCell &cell) {
+    os << '=';
+    cell.print(os);
+    return os;
 }

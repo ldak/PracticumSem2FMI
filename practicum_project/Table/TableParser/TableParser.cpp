@@ -23,6 +23,7 @@ std::ostream &operator<<(std::ostream &out, TableParser &tableParser) {
          tableParser.rows[i].print(out, tableParser.alignments);
          out << std::endl;
     }
+    return out;
 }
 
 WeakPtr<BasicCell> TableParser::getCell(int i, int j) {
@@ -39,7 +40,7 @@ void TableParser::setFunctionCellRefs() {
         if (cellExprs[i].expired())
             continue;
         CellExpr* cellExpr = dynamic_cast<CellExpr*>(cellExprs[i].get());
-        cellExpr->setCell(this->getCell(cellExpr->getRow(), cellExpr->getCol()));
+        cellExpr->setCell(this->getCell(cellExpr->getRow() - 1, cellExpr->getCol() - 1));
     }
 
 }

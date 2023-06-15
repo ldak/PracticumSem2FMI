@@ -16,3 +16,7 @@ double LiteralExpr::getValue() const {
 SharedPtr<BasicExpr> LiteralExpr::clone() const {
     return new LiteralExpr(*this);
 }
+
+void LiteralExpr::print(std::ostream &os) const {
+    os << this->value;
+}

@@ -17,7 +17,7 @@ public:
 
     double getValue() const override;
     SharedPtr<BasicExpr> clone() const override;
-    
+    void print(std::ostream &os) const override;
 };
 
 

@@ -5,7 +5,9 @@
 #include "PowExpr.h"
 
 double PowExpr::getValue() const {
-    return pow(left->getValue(), right->getValue());
+    double left = this->left->getValue();
+    double right = this->right->getValue();
+    return pow(left, right);
 }
 
 int PowExpr::getPriority() const {
@@ -14,4 +16,11 @@ int PowExpr::getPriority() const {
 
 SharedPtr<BasicExpr> PowExpr::clone() const {
     return SharedPtr<BasicExpr>(new PowExpr(*this));
+}
+
+void PowExpr::print(std::ostream &os) const {
+    this->left->print(os);
+    os << " ^ ";
+    this->right->print(os);
+
 }

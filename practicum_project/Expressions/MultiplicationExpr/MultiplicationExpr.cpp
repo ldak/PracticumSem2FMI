@@ -15,3 +15,9 @@ int MultiplicationExpr::getPriority() const {
 SharedPtr<BasicExpr> MultiplicationExpr::clone() const {
     return SharedPtr<BasicExpr>(new MultiplicationExpr(*this));
 }
+
+void MultiplicationExpr::print(std::ostream &os) const {
+    left->print(os);
+    os << " * ";
+    right->print(os);
+}

@@ -17,3 +17,9 @@ int DivisionExpr::getPriority() const {
 SharedPtr<BasicExpr> DivisionExpr::clone() const {
     return new DivisionExpr(*this);
 }
+
+void DivisionExpr::print(std::ostream &os) const {
+    left->print(os);
+    os << " / ";
+    right->print(os);
+}

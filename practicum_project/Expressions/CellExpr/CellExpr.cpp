@@ -35,3 +35,8 @@ int CellExpr::getCol() const {
 void CellExpr::setCell(const WeakPtr<BasicCell> &cell) {
     this->cell = cell;
 }
+
+void CellExpr::print(std::ostream &os) const {
+    os << "R" << this->row << "C" << this->col;
+
+}

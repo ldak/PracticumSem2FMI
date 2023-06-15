@@ -9,6 +9,7 @@
 #include "../BasicCell/BasicCell.h"
 #include "../../Utils/MyVector/MyVector.hpp"
 #include "../../Expressions/BasicExpr/BasicExpr.h"
+#include <iostream>
 
 class FormulaCell: public BasicCell {
 private:
@@ -20,8 +21,8 @@ public:
     int getLength() const override;
     void print(std::ostream &os) const override;
     SharedPtr<BasicCell> clone() const override;
-
+    friend std::ostream &operator<<(std::ostream &os, const FormulaCell &cell);
 };
-
+std::ostream &operator<<(std::ostream &os, const FormulaCell &cell);
 
 #endif //PRACTUCUMSEM2_FORMULACELL_H
