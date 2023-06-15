@@ -36,7 +36,6 @@ SharedPtr<BasicCell> CellsFactory::createCell(const MyString &content) {
 
     if (string[0] != '=')
         return new StringCell(string);
-    ExprFactory* exprFactory = ExprFactory::getInstance();
     SharedPtr<BasicExpr> expr = exprFactory->createExpr(string);
 
     return new FormulaCell(expr);
@@ -44,4 +43,13 @@ SharedPtr<BasicCell> CellsFactory::createCell(const MyString &content) {
 
     return nullptr;
 }
+
+CellsFactory::CellsFactory() {
+    exprFactory = ExprFactory::getInstance();
+}
+
+MyVector<WeakPtr<BasicExpr>> CellsFactory::getCellExprToFill() {
+    return this->exprFactory->getCellExprs();
+}
+
 

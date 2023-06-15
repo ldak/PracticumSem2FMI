@@ -66,3 +66,15 @@ std::istream &operator>>(std::istream &in, Row &row) {
     return in;
 }
 
+int Row::size() const {
+    return this->cells.size();
+}
+
+SharedPtr<BasicCell>& Row::operator[](int index) {
+    return this->cells[index];
+}
+
+const SharedPtr<BasicCell> &Row::operator[](int index) const {
+    return this->cells[index];
+}
+

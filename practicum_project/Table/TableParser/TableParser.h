@@ -14,11 +14,14 @@
 class TableParser {
 private:
     MyVector<Row> rows;
+
+    void setFunctionCellRefs();
 public:
 
     friend std::istream &operator>>(std::istream &in, TableParser &tableParser);
     friend std::ostream &operator<<(std::ostream &out, TableParser &tableParser);
 
+    WeakPtr<BasicCell> getCell(int i, int i1);
 };
 
 std::istream &operator>>(std::istream &in, TableParser &tableParser);

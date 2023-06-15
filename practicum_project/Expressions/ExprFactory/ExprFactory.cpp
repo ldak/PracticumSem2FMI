@@ -25,7 +25,7 @@ ExprFactory* ExprFactory::getInstance() {
 
 SharedPtr<BasicExpr> ExprFactory::createExpr(const MyString &string) {
     int i = 1;
-    SharedPtr<BasicExpr> result = createValueExpr(string, i);
+    SharedPtr<BasicExpr> result = createValueExpr(string, i, i);
     while (i < string.length()) {
         while(string[i] == ' ')
             i++;
@@ -48,7 +48,7 @@ SharedPtr<BasicExpr> ExprFactory::createExpr(const MyString &string) {
     return result;
 }
 
-SharedPtr<BasicExpr> ExprFactory::createValueExpr(const MyString &expr, int &index) {
+SharedPtr<BasicExpr> ExprFactory::createValueExpr(const MyString &expr, int start,  int &index) {
     while(expr[index] != ' '
           && expr[index] != '+'
           && expr[index] != '-'
@@ -58,10 +58,15 @@ SharedPtr<BasicExpr> ExprFactory::createValueExpr(const MyString &expr, int &ind
           && index < expr.length())
         index++;
 
-    MyString subString = expr.substr(0, index);
-    return subString[0] == 'R'
-             ? SharedPtr<BasicExpr>(new CellExpr(subString))
-             : SharedPtr<BasicExpr>(new LiteralExpr(subString.toDouble()));
+    MyString subString = expr.substr(start, index);
+    if (subString[0] != 'R') {
+        return SharedPtr<BasicExpr>(new LiteralExpr(subString.toDouble()));
+    }
+    SharedPtr<BasicExpr> cellExpr = SharedPtr<BasicExpr>(new CellExpr(subString));
+    WeakPtr<BasicExpr> weakCellExpr( cellExpr);
+    this->cellExprs.push_back(weakCellExpr);
+
+    return cellExpr;
 }
 
 SharedPtr<BasicExpr> ExprFactory::createOperationExpr(char operation) {
@@ -79,4 +84,8 @@ SharedPtr<BasicExpr> ExprFactory::createOperationExpr(char operation) {
         default:
             throw std::invalid_argument("Invalid operation");
     }
+}
+
+MyVector<WeakPtr<BasicExpr>> &ExprFactory::getCellExprs() {
+    return this->cellExprs;
 }

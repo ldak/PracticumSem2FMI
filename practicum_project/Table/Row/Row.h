@@ -28,6 +28,10 @@ public:
     Row& operator=(Row&& row) noexcept;
     ~Row();
 
+    int size() const;
+    SharedPtr<BasicCell>& operator[](int index);
+    const SharedPtr<BasicCell>& operator[](int index) const;
+
     friend std::istream &operator>>(std::istream &in, Row &row);
     friend std::ostream &operator<<(std::ostream &out, const Row &row);
 };

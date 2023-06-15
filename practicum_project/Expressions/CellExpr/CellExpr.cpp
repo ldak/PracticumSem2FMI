@@ -23,3 +23,15 @@ CellExpr::CellExpr(const MyString &expr) {
     this->col = expr.substr(i + 1, expr.length()).toInt();
 
 }
+
+int CellExpr::getRow() const {
+    return this->row;
+}
+
+int CellExpr::getCol() const {
+    return this->col;
+}
+
+void CellExpr::setCell(const WeakPtr<BasicCell> &cell) {
+    this->cell = cell;
+}
