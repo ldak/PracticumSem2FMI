@@ -61,8 +61,15 @@ public:
 	const T* operator->() const;
 	T* operator->();
 
+    T* get();
+
 	~SharedPtr();
 };
+
+template<typename T>
+T *SharedPtr<T>::get() {
+    return data;
+}
 
 template <typename T>
 void SharedPtr<T>::free()

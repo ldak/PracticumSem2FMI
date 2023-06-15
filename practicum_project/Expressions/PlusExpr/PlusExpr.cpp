@@ -18,7 +18,7 @@ SharedPtr<BasicExpr> PlusExpr::clone() const {
 
 void PlusExpr::print(std::ostream &os) const {
     left->print(os);
-    os << "+";
+    os << " + ";
     right->print(os);
 
 }

@@ -10,5 +10,14 @@ void BinaryExpr::setLeft(SharedPtr<BasicExpr>&& left) {
 }
 
 void BinaryExpr::setRight(SharedPtr<BasicExpr> &&right) {
-    this->right = std::move(right);
+    if (this->right.get() == nullptr){
+        this->right = std::move(right);
+        return;
+    }
+    if (this->right->getPriority() >= right->getPriority()){
+        right->setLeft(std::move(this->right));
+        this->right = right;
+        return;
+    }
+    this->right->setRight(std::move(right));
 }
