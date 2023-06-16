@@ -14,6 +14,7 @@ public:
     virtual int getLength() const = 0;
     virtual ~BasicCell() = default;
     virtual SharedPtr<BasicCell> clone() const = 0;
+    virtual void printExpression(std::ostream& os) const = 0;
 };
 
 

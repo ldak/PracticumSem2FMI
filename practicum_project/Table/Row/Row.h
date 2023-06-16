@@ -33,6 +33,7 @@ public:
     const SharedPtr<BasicCell>& operator[](int index) const;
 
     friend std::istream &operator>>(std::istream &in, Row &row);
+    friend std::ostream &operator<<(std::ostream &os, const Row &row);
 
     void print(std::ostream &os, MyVector<int> alignments) const;
 
@@ -40,5 +41,6 @@ public:
 };
 
 std::istream &operator>>(std::istream &in, Row &row);
+std::ostream &operator<<(std::ostream &os, const Row &row);
 
 #endif //PRACTUCUMSEM2_ROW_H

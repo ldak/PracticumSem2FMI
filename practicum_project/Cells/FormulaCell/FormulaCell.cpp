@@ -19,16 +19,15 @@ SharedPtr<BasicCell>FormulaCell::clone() const {
 }
 
 void FormulaCell::print(std::ostream &os) const {
-    expr->print(os);
-//    os << this->getValue();
+    os << this->getValue();
 }
 
 FormulaCell::FormulaCell(const SharedPtr<BasicExpr> &expr) {
     this->expr = expr;
 }
 
-std::ostream &operator<<(std::ostream &os, const FormulaCell &cell) {
+
+void FormulaCell::printExpression(std::ostream &os) const {
     os << '=';
-    cell.print(os);
-    return os;
+    expr->print(os);
 }

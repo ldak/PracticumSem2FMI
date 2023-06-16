@@ -104,5 +104,14 @@ void Row::print(std::ostream &os, MyVector<int> alignments) const {
     }
 }
 
+std::ostream &operator<<(std::ostream &os, const Row &row) {
+    for (int i = 0; i < row.cells.size() - 1 ; ++i) {
+        row.cells[i]->printExpression(os);
+        os << ", ";
+    }
+    row.cells[row.cells.size() - 1]->printExpression(os);
+    return os;
+}
+
 
 

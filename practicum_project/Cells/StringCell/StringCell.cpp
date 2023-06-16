@@ -27,3 +27,8 @@ double StringCell::getValue() const {
 SharedPtr<BasicCell>StringCell::clone() const {
     return new StringCell(*this);
 }
+
+void StringCell::printExpression(std::ostream &os) const {
+    os << this->value;
+
+}

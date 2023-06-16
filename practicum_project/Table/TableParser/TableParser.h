@@ -22,6 +22,8 @@ public:
     friend std::istream &operator>>(std::istream &in, TableParser &tableParser);
     friend std::ostream &operator<<(std::ostream &out, TableParser &tableParser);
 
+    void print(std::ostream &os) const;
+
     WeakPtr<BasicCell> getCell(int i, int i1);
 };
 

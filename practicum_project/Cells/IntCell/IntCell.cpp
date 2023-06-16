@@ -23,3 +23,7 @@ double IntCell::getValue() const {
 SharedPtr<BasicCell>IntCell::clone() const {
     return new IntCell(*this);
 }
+
+void IntCell::printExpression(std::ostream &os) const {
+    os << this->value;
+}

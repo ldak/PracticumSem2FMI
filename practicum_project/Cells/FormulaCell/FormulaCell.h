@@ -21,8 +21,7 @@ public:
     int getLength() const override;
     void print(std::ostream &os) const override;
     SharedPtr<BasicCell> clone() const override;
-    friend std::ostream &operator<<(std::ostream &os, const FormulaCell &cell);
+    void printExpression(std::ostream &os) const override;
 };
-std::ostream &operator<<(std::ostream &os, const FormulaCell &cell);
 
 #endif //PRACTUCUMSEM2_FORMULACELL_H

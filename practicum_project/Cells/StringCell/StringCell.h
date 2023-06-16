@@ -17,6 +17,7 @@ public:
     explicit StringCell(MyString &&value);
 
     void print(std::ostream &os) const override;
+    void printExpression(std::ostream &os) const override;
     int getLength() const override;
     double getValue() const override;
     SharedPtr<BasicCell> clone() const override;

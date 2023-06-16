@@ -19,6 +19,8 @@ public:
 
     void print(std::ostream &os) const override;
 
+    void printExpression(std::ostream &os) const override;
+
     int getLength() const override;
 
     SharedPtr<BasicCell> clone() const override;

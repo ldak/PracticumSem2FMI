@@ -16,6 +16,7 @@ public:
     explicit IntCell(int value);
     int getLength() const override;
     void print(std::ostream &os) const override;
+    void printExpression(std::ostream &os) const override;
     double getValue() const override;
     SharedPtr<BasicCell> clone() const override;
 };

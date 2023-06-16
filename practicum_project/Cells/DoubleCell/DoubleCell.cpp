@@ -24,3 +24,7 @@ void DoubleCell::print(std::ostream &os) const {
     os << this->value;
 
 }
+
+void DoubleCell::printExpression(std::ostream &os) const {
+    os << this->value;
+}

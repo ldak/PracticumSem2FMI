@@ -62,9 +62,15 @@ public:
 	T* operator->();
 
     T* get();
+    bool exists() const;
 
 	~SharedPtr();
 };
+
+template<typename T>
+bool SharedPtr<T>::exists() const {
+    return this->data != nullptr;
+}
 
 template<typename T>
 T *SharedPtr<T>::get() {

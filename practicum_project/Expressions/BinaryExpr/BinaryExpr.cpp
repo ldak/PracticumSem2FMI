@@ -10,7 +10,7 @@ void BinaryExpr::setLeft(SharedPtr<BasicExpr>&& left) {
 }
 
 void BinaryExpr::setRight(SharedPtr<BasicExpr> &&right) {
-    if (this->right.get() == nullptr){
+    if (this->right.exists()){
         this->right = std::move(right);
         return;
     }

@@ -20,8 +20,7 @@ std::istream &operator>>(std::istream &in, TableParser &tableParser){
 
 std::ostream &operator<<(std::ostream &out, TableParser &tableParser) {
     for (int i = 0; i < tableParser.rows.size(); ++i) {
-         tableParser.rows[i].print(out, tableParser.alignments);
-         out << std::endl;
+        out << tableParser.rows[i] << std::endl;
     }
     return out;
 }
@@ -48,6 +47,13 @@ void TableParser::setFunctionCellRefs() {
 void TableParser::setAlignments() {
     for (int i = 0; i < rows.size(); ++i) {
         rows[i].setAlignments(this->alignments);
+    }
+}
+
+void TableParser::print(std::ostream &os) const {
+    for (int i = 0; i < this->rows.size(); ++i) {
+        this->rows[i].print(os, this->alignments);
+        os << std::endl;
     }
 }
 
