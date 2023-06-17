@@ -10,7 +10,11 @@ double FormulaCell::getValue() const {
 }
 
 int FormulaCell::getLength() const {
-    return HelperFunctions::findLength(this->getValue());
+    try{
+        return HelperFunctions::findLength(this->getValue());
+    }catch (std::exception& e){
+        return 5; // strlen of "Error"
+    }
 }
 
 SharedPtr<BasicCell>FormulaCell::clone() const {
@@ -19,7 +23,11 @@ SharedPtr<BasicCell>FormulaCell::clone() const {
 }
 
 void FormulaCell::print(std::ostream &os) const {
-    os << this->getValue();
+    try {
+        os << this->getValue();
+    }catch (std::exception &e){
+        os << "Error";
+    }
 }
 
 FormulaCell::FormulaCell(const SharedPtr<BasicExpr> &expr) {
