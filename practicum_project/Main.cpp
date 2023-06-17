@@ -3,16 +3,11 @@
 //
 #include <fstream>
 #include "Table/TableParser/TableParser.h"
+#include "TableParserMenu/TableParserMenu.h"
 
 int main (){
-//    try{
-        TableParser parser;
-        std::ifstream ifs("Maika_ti.txt");
-        ifs >> parser;
-        std::cout << parser;
-//    }catch (std::exception &e){
-//        std::cout << e.what() << std::endl;
-//    }
+    TableParserMenu menu;
+    menu.programLoop();
 
     return 0;
 }

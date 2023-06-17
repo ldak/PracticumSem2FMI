@@ -19,9 +19,10 @@ std::istream &operator>>(std::istream &in, TableParser &tableParser){
 }
 
 std::ostream &operator<<(std::ostream &out, TableParser &tableParser) {
-    for (int i = 0; i < tableParser.rows.size(); ++i) {
+    for (int i = 0; i < tableParser.rows.size() - 1; ++i) {
         out << tableParser.rows[i] << std::endl;
     }
+    out << tableParser.rows[tableParser.rows.size() - 1];
     return out;
 }
 
@@ -62,6 +63,7 @@ void TableParser::setCell(int i, int j, const SharedPtr<BasicCell>& cell) {
         throw std::out_of_range("Invalid row or column");
     }
     this->rows[i][j] = cell;
-
+    this->setFunctionCellRefs();
+    this->setAlignments();
 }
 

@@ -15,7 +15,12 @@ void OpenTableCommand::execute(SharedPtr<TableParser>& table, MyString &tableFil
     }
     tableFile = buffer;
     table = new TableParser();
-    file >> (*table);
+    try{
+        file >> (*table);
+    }catch (std::exception& e){
+        std::cout << e.what() << std::endl;
+        return;
+    }
     file.close();
 }
 

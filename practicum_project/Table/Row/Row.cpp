@@ -102,7 +102,7 @@ void Row::print(std::ostream &os, MyVector<int> alignments) const {
         }
         os << " | ";
     }
-    for (int i = 0; i < alignments.size() - this->cells.size() ; ++i) {
+    for (int i = this->cells.size(); i < alignments.size(); ++i) {
         for (int j = 0; j < alignments[i] ; ++j) {
             os << ' ';
         }
