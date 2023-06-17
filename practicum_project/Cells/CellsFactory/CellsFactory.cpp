@@ -8,6 +8,7 @@
 #include "../StringCell/StringCell.h"
 #include "../../Expressions/ExprFactory/ExprFactory.h"
 #include "../FormulaCell/FormulaCell.h"
+#include "../EmptyCell/EmptyCell.h"
 
 CellsFactory* CellsFactory::instance = nullptr;
 
@@ -45,7 +46,9 @@ SharedPtr<BasicCell> CellsFactory::createCell(const MyString &content) {
             MyString error = "Invalid formula expression " + content;
             throw std::invalid_argument(error.c_str());
         }
-
+    }
+    if (content.length() == 0){
+        return new EmptyCell();
     }
 
     MyString error = "Invalid cell content " + content;
