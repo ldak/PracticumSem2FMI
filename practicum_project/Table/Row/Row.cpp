@@ -59,7 +59,7 @@ Row::~Row() {
 std::istream &operator>>(std::istream &in, Row &row) {
     CellsFactory* factory = CellsFactory::getInstance();
     while(!in.eof() ){
-        char buffer[1024];
+        char buffer[1024]{'\0'};
         in.getline(buffer, 1024, ',');
 //        if (in.eof())
 //            break;

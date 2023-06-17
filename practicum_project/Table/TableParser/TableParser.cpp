@@ -6,7 +6,7 @@
 
 std::istream &operator>>(std::istream &in, TableParser &tableParser){
     while(!in.eof()) {
-        char buffer[10024];
+        char buffer[10024]{'\0'};
         in.getline(buffer, 10024);
         std::stringstream ss(buffer);
         Row row;
@@ -39,13 +39,14 @@ void TableParser::setFunctionCellRefs() {
     for (int i = 0; i < cellExprs.size(); ++i) {
         if (cellExprs[i].expired())
             continue;
-        CellExpr* cellExpr = dynamic_cast<CellExpr*>(cellExprs[i].get());
+        CellExpr* cellExpr = static_cast<CellExpr*>(cellExprs[i].get());
         cellExpr->setCell(this->getCell(cellExpr->getRow() - 1, cellExpr->getCol() - 1));
     }
 
 }
 
 void TableParser::setAlignments() {
+    this->alignments.clear();
     for (int i = 0; i < rows.size(); ++i) {
         rows[i].setAlignments(this->alignments);
     }

@@ -21,6 +21,9 @@ int StringCell::getLength() const {
 }
 
 double StringCell::getValue() const {
+    if (this->value.isDouble())
+        return this->value.toDouble();
+
     return 0;
 }
 
@@ -29,6 +32,6 @@ SharedPtr<BasicCell>StringCell::clone() const {
 }
 
 void StringCell::printExpression(std::ostream &os) const {
-    os << this->value;
+    os << this->value.toStringLiteral();
 
 }

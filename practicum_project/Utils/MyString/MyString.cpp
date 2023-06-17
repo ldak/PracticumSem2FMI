@@ -194,7 +194,7 @@ bool MyString::isDouble() const {
         if (_data[i] > '9' || _data[i] < '0')
             break;
     }
-    if (_data[i] != '.')
+    if (_data[i] != '.' && _data[i] != '\0')
         return false;
     i++;
     for (; i < _length; i++) {
@@ -211,7 +211,7 @@ double MyString::toDouble() const{
     int i = 0;
     if (_data[0] == '-' || _data[0] == '+')
         i++;
-    for (; _data[i] != '.'&& _data[i] != ','; i++) {
+    for (; _data[i] != '.'&& _data[i] != ',' && _data[i]!= '\0'; i++) {
         res *= 10;
         res += _data[i] - '0';
     }
@@ -224,6 +224,40 @@ double MyString::toDouble() const{
     if (_data[0] == '-')
         res *= -1;
     return res;
+}
+
+bool MyString::isStringLiteral() const {
+    return _data[0] == '"' && _data[_length - 1] == '"';
+}
+
+MyString MyString::fromStringLiteral() const {
+    char buff[1024]{'\0'};
+    int index = 0;
+    for (int i = 1; i < _length - 1; ++i) {
+        if (_data[i] == '\\' && (_data[i + 1] == '\\' || _data[i + 1] == '"')) {
+            buff[index++] = _data[i + 1];
+            i++;
+        }
+        else
+            buff[index++] = _data[i];
+    }
+    return buff;
+}
+
+MyString MyString::toStringLiteral() const {
+    char buffer[1024]{'\0'};
+    buffer[0] = '"';
+    int index = 1;
+    for (int i = 0; i < _length ; ++i) {
+        if (_data[i] == '\\' || _data[i] == '"') {
+            buffer[index++] = '\\';
+            buffer[index++] = _data[i];
+        }
+        else
+            buffer[index++] = _data[i];
+    }
+    buffer[index++] = '"';
+    return buffer;
 }
 
 

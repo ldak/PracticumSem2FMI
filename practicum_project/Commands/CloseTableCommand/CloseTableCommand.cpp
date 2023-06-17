@@ -5,6 +5,10 @@
 #include "CloseTableCommand.h"
 
 void CloseTableCommand::execute(SharedPtr<TableParser> &table, MyString &tableFile) {
+    if (!table.exists()){
+        std::cout << "You need to open table first!" << std::endl;
+        return;
+    }
     table = nullptr;
     tableFile = "";
 }

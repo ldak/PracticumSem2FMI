@@ -9,6 +9,10 @@ SharedPtr<BasicCommand> PrintTableCommand::clone() const {
 }
 
 void PrintTableCommand::execute(SharedPtr<TableParser> &table, MyString &tableFile) {
+    if (!table.exists()){
+        std::cout << "You need to open table first!" << std::endl;
+        return;
+    }
     std::cout << "Table file: " << tableFile << std::endl;
     std::cout << "Table: " << std::endl;
     table->print(std::cout);

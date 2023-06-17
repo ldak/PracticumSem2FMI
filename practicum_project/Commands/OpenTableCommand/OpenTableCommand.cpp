@@ -5,7 +5,7 @@
 #include "OpenTableCommand.h"
 
 void OpenTableCommand::execute(SharedPtr<TableParser>& table, MyString &tableFile) {
-    char buffer[1024];
+    char buffer[1024]{'\0'};
     std::cout << "Enter file to read the table from: ";
     std::cin.getline(buffer, 1024);
     std::ifstream file(buffer);

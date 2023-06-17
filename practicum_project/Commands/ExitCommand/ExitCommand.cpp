@@ -10,5 +10,6 @@ SharedPtr<BasicCommand> ExitCommand::clone() const {
 
 void ExitCommand::execute(SharedPtr<TableParser> &table, MyString &tableFile) {
     std::cout << "Exiting the program..." << std::endl;
+    CellsFactory::freeInstance();
     exit(0);
 }

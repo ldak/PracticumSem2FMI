@@ -6,7 +6,11 @@
 #include <fstream>
 
 void SaveTableAsCommand::execute(SharedPtr<TableParser> &table, MyString &tableFile) {
-    char buffer[1024];
+    if (!table.exists()){
+        std::cout << "You need to open table first!" << std::endl;
+        return;
+    }
+    char buffer[1024]{'\0'};
     std::cout << "Enter file name: ";
     std::cin.getline(buffer, 1024);
     std::ofstream out(buffer);

@@ -34,11 +34,22 @@ SharedPtr<BasicCell> CellsFactory::createCell(const MyString &content) {
     if (string.isDouble())
         return new DoubleCell(string.toDouble());
 
-    if (string[0] != '=')
-        return new StringCell(string);
-    SharedPtr<BasicExpr> expr = exprFactory->createExpr(string);
+    if (string.isStringLiteral())
+        return new StringCell(string.fromStringLiteral());
 
-    return new FormulaCell(expr);
+    if (string[0] == '='){
+        try{
+            SharedPtr<BasicExpr> expr = exprFactory->createExpr(string);
+            return new FormulaCell(expr);
+        }catch (std::exception& e){
+            MyString error = "Invalid formula expression " + content;
+            throw std::invalid_argument(error.c_str());
+        }
+
+    }
+
+    MyString error = "Invalid cell content " + content;
+    throw std::invalid_argument(error.c_str());
 }
 
 CellsFactory::CellsFactory() {

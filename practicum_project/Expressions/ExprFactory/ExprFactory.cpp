@@ -25,6 +25,8 @@ ExprFactory* ExprFactory::getInstance() {
 
 SharedPtr<BasicExpr> ExprFactory::createExpr(const MyString &string) {
     int i = 1;
+    while(string[i] == ' ')
+        i++;
     SharedPtr<BasicExpr> result = createValueExpr(string, i, i);
     while (i < string.length()) {
         while(string[i] == ' ')

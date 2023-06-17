@@ -45,6 +45,12 @@ public:
     bool isDouble() const;
 
     double toDouble() const;
+
+    bool isStringLiteral() const;
+
+    MyString fromStringLiteral() const;
+
+    MyString toStringLiteral() const;
 };
 MyString operator+(const MyString& lhs, const MyString& rhs);
 
