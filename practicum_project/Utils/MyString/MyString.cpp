@@ -227,7 +227,7 @@ double MyString::toDouble() const{
 }
 
 bool MyString::isStringLiteral() const {
-    return _data[0] == '"' && _data[_length - 1] == '"';
+    return _data[0] == '"' && _data[_length - 1] == '"' && _length > 1;
 }
 
 MyString MyString::fromStringLiteral() const {
