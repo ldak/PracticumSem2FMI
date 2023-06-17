@@ -102,6 +102,12 @@ void Row::print(std::ostream &os, MyVector<int> alignments) const {
         }
         os << " | ";
     }
+    for (int i = 0; i < alignments.size() - this->cells.size() ; ++i) {
+        for (int j = 0; j < alignments[i] ; ++j) {
+            os << ' ';
+        }
+        os << " | ";
+    }
 }
 
 std::ostream &operator<<(std::ostream &os, const Row &row) {

@@ -57,3 +57,11 @@ void TableParser::print(std::ostream &os) const {
     }
 }
 
+void TableParser::setCell(int i, int j, const SharedPtr<BasicCell>& cell) {
+    if (this->rows.size() <= i || this->rows[i].size() <= j) {
+        throw std::out_of_range("Invalid row or column");
+    }
+    this->rows[i][j] = cell;
+
+}
+

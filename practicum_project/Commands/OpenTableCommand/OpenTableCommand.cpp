@@ -5,11 +5,15 @@
 #include "OpenTableCommand.h"
 
 void OpenTableCommand::execute(SharedPtr<TableParser>& table, MyString &tableFile) {
-    std::ifstream file(tableFile.c_str());
+    char buffer[1024];
+    std::cout << "Enter file to read the table from: ";
+    std::cin.getline(buffer, 1024);
+    std::ifstream file(buffer);
     if(!file.is_open()){
         std::cout << "File not found!" << std::endl;
         return;
     }
+    tableFile = buffer;
     table = new TableParser();
     file >> (*table);
     file.close();
