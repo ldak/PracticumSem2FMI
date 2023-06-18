@@ -47,7 +47,7 @@ SharedPtr<BasicCell> CellsFactory::createCell(const MyString &content) {
             throw std::invalid_argument(error.c_str());
         }
     }
-    if (content.length() == 0){
+    if (string.length() == 0){
         return new EmptyCell();
     }
 
