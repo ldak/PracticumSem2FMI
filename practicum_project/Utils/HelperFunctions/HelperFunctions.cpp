@@ -27,7 +27,7 @@ int HelperFunctions::findLength(double a){
     int realPart = ((int)a)/10;
     if (realPart != 0)
         length += findLength(realPart);
-    //floating part with real part first digit
+    //floating part with real part last digit
     double floatPart = a - realPart*10;
     //using stream precision to round
     int roundedFloatPart = round(floatPart * pow(10, precision));

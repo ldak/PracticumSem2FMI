@@ -38,6 +38,8 @@ public:
     void print(std::ostream &os, MyVector<int> alignments) const;
 
     void setAlignments(MyVector<int>& vector);
+
+    void addCells(int i);
 };
 
 std::istream &operator>>(std::istream &in, Row &row);

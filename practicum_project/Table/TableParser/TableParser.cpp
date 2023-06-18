@@ -13,8 +13,19 @@ std::istream &operator>>(std::istream &in, TableParser &tableParser){
         ss >> row;
         tableParser.rows.push_back(row);
     }
+    int columnCount = 0;
+    for (int i = 0; i < tableParser.rows.size(); ++i) {
+        Row& row = tableParser.rows[i];
+        if (row.size() > columnCount)
+            columnCount = row.size();
+    }
+    for (int i = 0; i < tableParser.rows.size(); ++i) {
+        Row& row = tableParser.rows[i];
+        row.addCells(columnCount - row.size());
+    }
     tableParser.setFunctionCellRefs();
     tableParser.setAlignments();
+
     return in;
 }
 

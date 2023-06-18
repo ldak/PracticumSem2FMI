@@ -3,6 +3,7 @@
 //
 
 #include "Row.h"
+#include "../../Cells/EmptyCell/EmptyCell.h"
 
 Row::Row(const MyVector<SharedPtr<BasicCell>> &cells): cells(cells.size()) {
     for (int i = 0; i < cells.size(); ++i) {
@@ -102,12 +103,6 @@ void Row::print(std::ostream &os, MyVector<int> alignments) const {
         }
         os << " | ";
     }
-    for (int i = this->cells.size(); i < alignments.size(); ++i) {
-        for (int j = 0; j < alignments[i] ; ++j) {
-            os << ' ';
-        }
-        os << " | ";
-    }
 }
 
 std::ostream &operator<<(std::ostream &os, const Row &row) {
@@ -117,6 +112,12 @@ std::ostream &operator<<(std::ostream &os, const Row &row) {
     }
     row.cells[row.cells.size() - 1]->printExpression(os);
     return os;
+}
+
+void Row::addCells(int i) {
+    for (int j = 0; j < i; ++j) {
+        this->cells.push_back(new EmptyCell());
+    }
 }
 
 

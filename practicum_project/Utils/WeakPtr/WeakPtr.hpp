@@ -128,7 +128,7 @@ WeakPtr<T>::~WeakPtr()
 template <typename T>
 bool WeakPtr<T>::expired() const
 { 
-	return counter && counter->useCount == 0;
+	return counter == nullptr || counter->useCount == 0;
 }
 
 template <typename T>
