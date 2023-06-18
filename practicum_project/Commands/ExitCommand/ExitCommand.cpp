@@ -3,6 +3,7 @@
 //
 
 #include "ExitCommand.h"
+#include "../CommandFactory/CommandFactory.h"
 
 SharedPtr<BasicCommand> ExitCommand::clone() const {
     return SharedPtr<BasicCommand>(new ExitCommand(*this));
@@ -10,6 +11,7 @@ SharedPtr<BasicCommand> ExitCommand::clone() const {
 
 void ExitCommand::execute(SharedPtr<TableParser> &table, MyString &tableFile) {
     std::cout << "Exiting the program..." << std::endl;
-    CellsFactory::freeInstance();
+    CommandFactory::freeInstance();
+    table = nullptr;
     exit(0);
 }

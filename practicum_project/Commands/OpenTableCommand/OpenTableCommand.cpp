@@ -19,11 +19,13 @@ void OpenTableCommand::execute(SharedPtr<TableParser>& table, MyString &tableFil
         file >> (*table);
     }catch (std::exception& e){
         std::cout << e.what() << std::endl;
+        table = nullptr;
+        tableFile = "";
         return;
     }
     file.close();
 }
 
 SharedPtr<BasicCommand> OpenTableCommand::clone() const {
-    return SharedPtr<BasicCommand>();
+    return new OpenTableCommand(*this);
 }
